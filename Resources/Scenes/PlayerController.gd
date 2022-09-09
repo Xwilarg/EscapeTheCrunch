@@ -6,7 +6,11 @@ export var speed = 15
 export var xSens = -1.0
 export var interactionDistance = 2
 
+var pressEUI: Object
+
 func _ready():
+	pressEUI = get_node("Label")
+	pressEUI.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _input(event):         
@@ -36,4 +40,6 @@ func _physics_process(delta):
 	var to = from + $Camera.project_ray_normal(center) * 100
 	var result = get_world().direct_space_state.intersect_ray(from, to)
 	if result and result.collider.name == "Safe" and global_transform.origin.distance_to(result.collider.global_transform.origin) < interactionDistance:
-		print("ok")
+		pressEUI.show()
+	else:
+		pressEUI.hide()
