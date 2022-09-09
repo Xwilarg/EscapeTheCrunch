@@ -31,6 +31,15 @@ shape = SubResource( 4 )
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody/CollisionShape"]
 mesh = SubResource( 5 )
 
+[node name="StaticBody" type="StaticBody" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.378, 0.344956, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody/StaticBody"]
+shape = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody/StaticBody/CollisionShape"]
+mesh = SubResource( 5 )
+
 [node name="Map" type="Node" parent="."]
 
 [node name="GameManager" type="Node" parent="Map"]

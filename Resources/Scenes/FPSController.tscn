@@ -4,7 +4,7 @@
 [ext_resource path="res://Resources/Scenes/World.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Resources/Scenes/Boss.gd" type="Script" id=3]
 
-[sub_resource type="NavigationMesh" id=3]
+[sub_resource type="NavigationMesh" id=7]
 
 [sub_resource type="CapsuleShape" id=4]
 
@@ -20,7 +20,7 @@ albedo_color = Color( 0, 0, 0, 1 )
 [node name="Navigation" type="Navigation" parent="."]
 
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
-navmesh = SubResource( 3 )
+navmesh = SubResource( 7 )
 
 [node name="World" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 2 )]
 
