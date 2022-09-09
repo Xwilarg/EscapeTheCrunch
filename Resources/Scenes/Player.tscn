@@ -15,4 +15,14 @@ transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.6, 0, 0, -0.9 )
 shape = SubResource( 3 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.0577113, -1.3914 )
+transform = Transform( 1, -1.31134e-07, 5.73206e-15, -5.73206e-15, -7.10543e-15, 1, -1.31134e-07, -1, -7.10543e-15, 0, -4.81413e-08, -1.10135 )
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 40.0
+margin_bottom = 14.0
+align = 1
+valign = 1
