@@ -13,5 +13,5 @@ func _ready():
 		var value = indexes[nb]
 		var instance = scene.instance()
 		instance.setId(nb)
-		instance.position = nodes[nb].position
+		instance.translation = nodes[nb].translation
 		indexes.erase(nb)
