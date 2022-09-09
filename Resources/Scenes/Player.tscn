@@ -28,4 +28,5 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_right = 40.0
 margin_bottom = 14.0
-text = "Press E"
+align = 1
+valign = 1

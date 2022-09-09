@@ -4,16 +4,26 @@ class_name PlayerController
 
 export var speed = 15
 export var xSens = -1.0
-export var interactionDistance = 2
+export var interactionDistance = 3
+export var doorDistance = 5
 
-var pressEUI: Object
+var door: Object
+var label: Object
 var safeTarget: Object
 var id = 1
 var currentKey: Object = null
 
+func isReadyToExit() -> bool:
+	return currentKey != null and isOnDoorRange()
+
+func isOnDoorRange() -> bool:
+	return global_transform.origin.distance_to(door.global_transform.origin) < doorDistance
+
 func _ready():
-	pressEUI = get_node("Label")
-	pressEUI.hide()
+	door = get_node("../Navigation/NavigationMeshInstance/World/Map/Door")
+	door.registerPlayer(self)
+	label = get_node("Label")
+	label.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _input(event):         
@@ -23,10 +33,12 @@ func _input(event):
 	if Input.is_action_pressed("action") and safeTarget != null and currentKey == null:
 		currentKey = safeTarget
 		safeTarget.hide()
-		pressEUI.hide()
+		label.hide()
 		safeTarget = null
 
 func _physics_process(delta):
+	label.hide()
+
 	# Controls
 	var x = 0
 	var y = 0
@@ -48,8 +60,16 @@ func _physics_process(delta):
 	var to = from + $Camera.project_ray_normal(center) * 100
 	var result = get_world().direct_space_state.intersect_ray(from, to)
 	if result and result.collider.name == "Safe" and global_transform.origin.distance_to(result.collider.global_transform.origin) < interactionDistance && result.collider.is_visible() and currentKey == null:
-		pressEUI.show()
+		label.show()
+		label.set_text("Press E")
 		safeTarget = result.collider
+	elif isOnDoorRange():
+		label.show()
+		if currentKey != null:
+			label.set_text("You need to find your key first!")
+		elif door.areAllPlayersReady():
+			label.hide() # End of the game!
+		else:
+			label.set_text("Help the others players to find their key and come back with everyone")
 	else:
-		pressEUI.hide()
 		safeTarget = null
