@@ -15,3 +15,4 @@ func _ready():
 		instance.setId(nb)
 		instance.translation = nodes[nb].translation
 		indexes.erase(nb)
+		self.add_child(instance);
