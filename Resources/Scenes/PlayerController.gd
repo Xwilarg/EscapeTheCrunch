@@ -1,31 +1,28 @@
 extends KinematicBody
 
 export var speed = 15
-export var xSens = 1
-
-var velocity = Vector3.ZERO
+export var xSens = -1
 
 func _ready():
 	pass
 
 func _input(event):         
 	if event is InputEventMouseMotion:
-		$Camera.rotate_z(deg2rad(event.relative.x * xSens))
+		rotate_y(deg2rad(event.relative.x * xSens))
+		$Camera.rotate_x(deg2rad(event.relative.y * xSens))
 
 func _physics_process(delta):
-	var direction = Vector3.ZERO
+	var x = 0
+	var y = 0
 
 	if Input.is_action_pressed("move_right"):
-		direction.x += 1
+		x = 1
 	elif Input.is_action_pressed("move_left"):
-		direction.x -= 1
+		x = -1
 	if Input.is_action_pressed("move_back"):
-		direction.z += 1
+		y = 1
 	elif Input.is_action_pressed("move_forward"):
-		direction.z -= 1
+		y = -1
 
-	direction = direction.normalized()
-
-	var forward = global_transform.basis
-	velocity = forward.z * direction.z * speed + forward.x * direction.x * speed
-	velocity = move_and_slide(velocity, Vector3.UP)
+	var velocity = (global_transform.basis.y * y + global_transform.basis.x * x).normalized() * speed
+	move_and_slide(velocity)
