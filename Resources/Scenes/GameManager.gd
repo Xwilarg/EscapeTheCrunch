@@ -9,9 +9,9 @@ func _ready():
 	var indexes = range(nodes.size())
 	var scene = load("res://Resources//Scenes/Safe.tscn")
 	for i in safeCount:
-		var nb = rng.randf_range(0, indexes.size())
+		var nb = rng.randi_range(0, indexes.size() - 1)
 		var value = indexes[nb]
 		var instance = scene.instance()
 		instance.setId(nb)
-		instance.global_transform.origin = nodes[nb].global_transform.origin
+		instance.position = nodes[nb].position
 		indexes.erase(nb)

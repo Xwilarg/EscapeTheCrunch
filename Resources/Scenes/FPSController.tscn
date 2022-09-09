@@ -46,7 +46,7 @@ script = ExtResource( 3 )
 [node name="Spawns" type="Spatial" parent="Map"]
 
 [node name="Node" type="Spatial" parent="Map/Spawns"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7062, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.706, 2, 0 )
 
 [node name="Node2" type="Spatial" parent="Map/Spawns"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16.0434 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 16.043 )

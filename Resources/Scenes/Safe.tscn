@@ -6,7 +6,7 @@
 
 [sub_resource type="CubeMesh" id=6]
 
-[node name="Safe" type="StaticBody"]
+[node name="Safe" type="KinematicBody"]
 transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -6.51611, 2.6807, 3.64293 )
 script = ExtResource( 1 )
 
