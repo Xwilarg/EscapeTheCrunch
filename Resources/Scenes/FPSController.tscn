@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Resources/Scenes/PlayerController.gd" type="Script" id=1]
-[ext_resource path="res://Resources/Scenes/Objective.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Scenes/GameManager.gd" type="Script" id=3]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 20, 1, 20 )
@@ -12,10 +12,6 @@ size = Vector3( 40, 2, 40 )
 [sub_resource type="CapsuleShape" id=3]
 
 [sub_resource type="CapsuleMesh" id=4]
-
-[sub_resource type="BoxShape" id=5]
-
-[sub_resource type="CubeMesh" id=6]
 
 [node name="FPSController" type="Spatial"]
 
@@ -42,12 +38,15 @@ mesh = SubResource( 4 )
 [node name="Camera" type="Camera" parent="Player"]
 transform = Transform( 1, -1.31134e-07, 5.73206e-15, -5.73206e-15, -7.10543e-15, 1, -1.31134e-07, -1, -7.10543e-15, 0, -4.81413e-08, -1.10135 )
 
-[node name="Safe" type="StaticBody" parent="."]
-transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -3.51102, 2.6807, 3.64293 )
-script = ExtResource( 2 )
+[node name="Map" type="Node" parent="."]
 
-[node name="CollisionShape" type="CollisionShape" parent="Safe"]
-shape = SubResource( 5 )
+[node name="GameManager" type="Node" parent="Map"]
+script = ExtResource( 3 )
 
-[node name="MeshInstance" type="MeshInstance" parent="Safe/CollisionShape"]
-mesh = SubResource( 6 )
+[node name="Spawns" type="Spatial" parent="Map"]
+
+[node name="Node" type="Spatial" parent="Map/Spawns"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7062, 0, 0 )
+
+[node name="Node2" type="Spatial" parent="Map/Spawns"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16.0434 )
