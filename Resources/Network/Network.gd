@@ -10,6 +10,7 @@ var ip_address = "127.0.0.1";
 var current_player_username = "";
 
 var team = 0
+var playerID = -1
 
 var peers = [];
 var teams = [];
@@ -21,15 +22,28 @@ func _ready() -> void:
 	get_tree().connect("network_peer_connected", self, "_peer_connected");
 	get_tree().connect("network_peer_disconnected", self, "_peer_disconnected");
 
+func spawn_player(nom) -> void:
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var spawns = get_node("/root/Spatial/MeshInstance/Spawns").get_children()
+	var pl = load("res://Resources/Scenes/Player.tscn")
+	var nb = rng.randi_range(0, spawns.size() - 1)
+	var instance = pl.instance()
+	instance.name = nom;
+	instance.translation = spawns[nb].translation;
+	get_node("/root/Spatial/MeshInstance/").add_child(instance);
+
 func create_server() -> void:
 	print("creating server");
 	server = NetworkedMultiplayerENet.new();
 	server.create_server(int(defaultPort), MAX_CLIENTS);
 	get_tree().set_network_peer(server);
-#	var timer = get_node("/root/World/Timer");
-#	timer.set_wait_time(0.05);
-#	timer.connect("timeout", get_node("/root/World/Game World"), "_refresh_game");
-#	timer.start();
+	playerID = "PlayerServer"
+	spawn_player(playerID);
+	var timer = get_node("/root/Spatial/Timer");
+	timer.set_wait_time(0.05);
+	timer.connect("timeout", get_node("/root/Spatial/MeshInstance/"), "_refresh_game");
+	timer.start();
 
 func join_server() -> void:
 	client = NetworkedMultiplayerENet.new()
@@ -63,7 +77,7 @@ static func sort_ascending(a, b):
 func _peer_connected(id):
 	peers.append(id);
 	teams.append(0);
-	rpc_id(id, "r_set_team", 0);
+	rpc_id(id, "r_init_player", "Player" + str(id));
 	print("Player id: " + str(id) + " connected");
 	print(peers);
 	print(teams);
@@ -79,5 +93,7 @@ func _peer_disconnected(id):
 	print("Player id: " + str(id) + " disconnected");
 	print(peers);
 
-puppet func r_set_team(s_team):
-	team = s_team;
+puppet func r_init_player(r_playerID):
+	team = 1;
+	playerID = r_playerID;
+	spawn_player(playerID);
