@@ -14,6 +14,10 @@ config/name="ShittyHorrorGameJam"
 run/main_scene="res://Resources/Scenes/FPSController.tscn"
 config/icon="res://Resources/icon.png"
 
+[autoload]
+
+Network="*res://Resources/Network/Network.gd"
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
