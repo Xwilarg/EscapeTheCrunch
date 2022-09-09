@@ -28,7 +28,10 @@ mesh = SubResource( 3 )
 skeleton = NodePath("../MeshInstance")
 material/0 = SubResource( 4 )
 
-[node name="CollisionShape" type="CollisionShape" parent="MeshInstance2"]
+[node name="RigidBody" type="RigidBody" parent="MeshInstance2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance2/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 5 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
