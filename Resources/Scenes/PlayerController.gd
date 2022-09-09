@@ -9,6 +9,7 @@ func _ready():
 func _input(event):         
 	if event is InputEventMouseMotion:
 		rotate_y(deg2rad(event.relative.x * xSens))
+		$Camera.rotate_x(deg2rad(event.relative.y * xSens))
 
 func _physics_process(delta):
 	var x = 0
