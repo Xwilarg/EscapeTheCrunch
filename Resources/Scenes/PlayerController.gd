@@ -7,7 +7,7 @@ export var xSens = -1.0
 export var interactionDistance = 2
 
 func _ready():
-	pass
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _input(event):         
 	if event is InputEventMouseMotion:
