@@ -1,7 +1,10 @@
-extends KinematicBody
+extends Entity
+
+class_name PlayerController
 
 export var speed = 15
-export var xSens = -1
+export var xSens = -1.0
+export var interactionDistance = 2
 
 func _ready():
 	pass
@@ -12,6 +15,7 @@ func _input(event):
 		$Camera.rotate_x(deg2rad(event.relative.y * xSens))
 
 func _physics_process(delta):
+	# Controls
 	var x = 0
 	var y = 0
 
@@ -26,3 +30,10 @@ func _physics_process(delta):
 
 	var velocity = (global_transform.basis.y * y + global_transform.basis.x * x).normalized() * speed
 	move_and_slide(velocity)
+	
+	var center = get_viewport().size/2
+	var from = $Camera.project_ray_origin(center)
+	var to = from + $Camera.project_ray_normal(center) * 100
+	var result = get_world().direct_space_state.intersect_ray(from, to)
+	if result and result.collider.name == "Safe" and global_transform.origin.distance_to(result.collider.global_transform.origin) < interactionDistance:
+		print("ok")

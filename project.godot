@@ -8,6 +8,22 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "KinematicBody",
+"class": "Entity",
+"language": "GDScript",
+"path": "res://Resources/Assets/Scripts/Entity.gd"
+}, {
+"base": "Entity",
+"class": "PlayerController",
+"language": "GDScript",
+"path": "res://Resources/Scenes/PlayerController.gd"
+} ]
+_global_script_class_icons={
+"Entity": "",
+"PlayerController": ""
+}
+
 [application]
 
 config/name="ShittyHorrorGameJam"
