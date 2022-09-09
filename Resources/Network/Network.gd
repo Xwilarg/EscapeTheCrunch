@@ -1,6 +1,6 @@
 extends Node
 
-const MAX_CLIENTS = 1;
+const MAX_CLIENTS = 12;
 
 var server = null;
 var client = null;
@@ -26,10 +26,10 @@ func create_server() -> void:
 	server = NetworkedMultiplayerENet.new();
 	server.create_server(int(defaultPort), MAX_CLIENTS);
 	get_tree().set_network_peer(server);
-	var timer = get_node("/root/World/Timer");
-	timer.set_wait_time(0.05);
-	timer.connect("timeout", get_node("/root/World/Game World"), "_refresh_game");
-	timer.start();
+#	var timer = get_node("/root/World/Timer");
+#	timer.set_wait_time(0.05);
+#	timer.connect("timeout", get_node("/root/World/Game World"), "_refresh_game");
+#	timer.start();
 
 func join_server() -> void:
 	client = NetworkedMultiplayerENet.new()
