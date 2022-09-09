@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Resources/Scenes/GameManager.gd" type="Script" id=1]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 20, 1, 20 )
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 40, 2, 40 )
+
+[sub_resource type="BoxShape" id=4]
+
+[sub_resource type="CubeMesh" id=5]
+
+[node name="World" type="Spatial"]
+
+[node name="Floor" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Floor/CollisionShape"]
+mesh = SubResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.38746, 1.65475, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody/CollisionShape"]
+mesh = SubResource( 5 )
+
+[node name="Map" type="Node" parent="."]
+
+[node name="GameManager" type="Node" parent="Map"]
+script = ExtResource( 1 )
+
+[node name="Spawns" type="Spatial" parent="Map"]
+
+[node name="Node" type="Spatial" parent="Map/Spawns"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.706, 2, 0 )
+
+[node name="Node2" type="Spatial" parent="Map/Spawns"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 16.043 )

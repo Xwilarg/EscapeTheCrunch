@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Entity",
+"class": "Boss",
+"language": "GDScript",
+"path": "res://Resources/Scenes/Boss.gd"
+}, {
 "base": "KinematicBody",
 "class": "Entity",
 "language": "GDScript",
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://Resources/Scenes/PlayerController.gd"
 } ]
 _global_script_class_icons={
+"Boss": "",
 "Entity": "",
 "Objective": "",
 "PlayerController": ""

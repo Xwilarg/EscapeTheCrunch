@@ -1,35 +1,36 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Resources/Scenes/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Resources/Scenes/GameManager.gd" type="Script" id=3]
+[ext_resource path="res://Resources/Scenes/World.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Resources/Scenes/Boss.gd" type="Script" id=3]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 20, 1, 20 )
+[sub_resource type="NavigationMesh" id=3]
 
-[sub_resource type="CubeMesh" id=2]
-size = Vector3( 40, 2, 40 )
+[sub_resource type="CapsuleShape" id=4]
+
+[sub_resource type="CapsuleMesh" id=5]
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0, 0, 0, 1 )
 
 [node name="FPSController" type="Spatial"]
 
-[node name="Floor" type="StaticBody" parent="."]
-
-[node name="CollisionShape" type="CollisionShape" parent="Floor"]
-shape = SubResource( 1 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Floor/CollisionShape"]
-mesh = SubResource( 2 )
-
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
-[node name="Map" type="Node" parent="."]
+[node name="Navigation" type="Navigation" parent="."]
 
-[node name="GameManager" type="Node" parent="Map"]
+[node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
+navmesh = SubResource( 3 )
+
+[node name="World" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 2 )]
+
+[node name="Boss" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.58526, 11.7452 )
 script = ExtResource( 3 )
 
-[node name="Spawns" type="Spatial" parent="Map"]
+[node name="CollisionShape" type="CollisionShape" parent="Boss"]
+shape = SubResource( 4 )
 
-[node name="Node" type="Spatial" parent="Map/Spawns"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.706, 2, 0 )
-
-[node name="Node2" type="Spatial" parent="Map/Spawns"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 16.043 )
+[node name="MeshInstance" type="MeshInstance" parent="Boss/CollisionShape"]
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
