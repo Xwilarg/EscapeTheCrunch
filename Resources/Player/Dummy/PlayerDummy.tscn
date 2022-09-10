@@ -1,9 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Resources/Player/main_character_rigged_1.glb" type="PackedScene" id=1]
 [ext_resource path="res://Resources/Player/Dummy/PlayerDummy.gd" type="Script" id=2]
 
 [sub_resource type="CylinderShape" id=6]
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "main_characterAction"
+
+[sub_resource type="AnimationNodeBlendTree" id=8]
+graph_offset = Vector2( -367, 88 )
+nodes/Animation/node = SubResource( 7 )
+nodes/Animation/position = Vector2( -40, 120 )
+node_connections = [ "output", 0, "Animation" ]
 
 [node name="PlayerDummy" type="KinematicBody"]
 script = ExtResource( 2 )
@@ -13,7 +22,14 @@ transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 1, 0 )
 shape = SubResource( 6 )
 
 [node name="main_character_rigged_1" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 8 )
+anim_player = NodePath("../main_character_rigged_1/AnimationPlayer")
 
 [node name="NavigationAgent" type="NavigationAgent" parent="."]
 
 [node name="RayCast" type="RayCast" parent="."]
+
+[editable path="main_character_rigged_1"]
