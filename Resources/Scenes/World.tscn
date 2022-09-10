@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
+[ext_resource path="res://Resources/Assets/Walls/SM_Wall.glb" type="PackedScene" id=1]
 [ext_resource path="res://Resources/Scenes/Door.gd" type="Script" id=2]
 
 [sub_resource type="BoxShape" id=4]
@@ -7,10 +8,10 @@
 [sub_resource type="CubeMesh" id=5]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 20, 1, 20 )
+extents = Vector3( 5, 1, 5 )
 
 [sub_resource type="CubeMesh" id=2]
-size = Vector3( 40, 2, 40 )
+size = Vector3( 10, 2, 10 )
 
 [node name="World" type="Spatial"]
 
@@ -25,7 +26,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.706, 1, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 16.043 )
 
 [node name="Door" type="StaticBody" parent="Map"]
-transform = Transform( 1, 0, 0, 0, 1.77786, 0, 0, 0, 0.216145, 3.64811, 1.75241, -19.7909 )
+transform = Transform( 1, 0, 0, 0, 1.77786, 0, 0, 0, 0.216145, 0.0129588, 1.75241, 5.07373 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Map/Door"]
@@ -43,4 +44,55 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="SpawnRoom/Floor/CollisionShape"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00261211, 0, -0.0217457 )
 mesh = SubResource( 2 )
+
+[node name="Walls" type="Spatial" parent="SpawnRoom"]
+
+[node name="SM_Wall11" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -5 )
+
+[node name="SM_Wall12" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -5 )
+
+[node name="SM_Wall" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -5 )
+
+[node name="SM_Wall2" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -5 )
+
+[node name="SM_Wall3" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, -4 )
+
+[node name="SM_Wall4" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
+transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 5, 0, -2 )
+
+[node name="SM_Wall5" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
+transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 5, 0, 4 )
+
+[node name="SM_Wall6" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
+transform = Transform( -2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 5, 0, 2 )
+
+[node name="SM_Wall7" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
+transform = Transform( 3.0598e-07, 0, 1, 0, 1, 0, -1, 0, 3.0598e-07, -5, 0, 4 )
+
+[node name="SM_Wall8" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
+transform = Transform( -3.93403e-07, 0, -1, 0, 1, 0, 1, 0, -3.93403e-07, -5, 0, 2 )
+
+[node name="SM_Wall9" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
+transform = Transform( -3.93403e-07, 0, -1, 0, 1, 0, 1, 0, -3.93403e-07, -5, 0, -4 )
+
+[node name="SM_Wall10" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
+transform = Transform( 4.80825e-07, 0, 1, 0, 1, 0, -1, 0, 4.80825e-07, -5, 0, -2 )
+
+[node name="SM_Wall13" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 5 )
+
+[node name="SM_Wall14" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 5 )
+
+[node name="SM_Wall15" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5 )
+
+[node name="SM_Wall16" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 5 )

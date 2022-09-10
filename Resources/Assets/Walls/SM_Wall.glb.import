@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/SM_Wall_300.fbx-5450d8fa455ddbdba5595a79f59044c6.scn"
+path="res://.import/SM_Wall.glb-b1008a679579834c20dfe85bd8da27d4.scn"
 
 [deps]
 
-source_file="res://Resources/Assets/Walls/SM_Wall_300.fbx"
-dest_files=[ "res://.import/SM_Wall_300.fbx-5450d8fa455ddbdba5595a79f59044c6.scn" ]
+source_file="res://Resources/Assets/Walls/SM_Wall.glb"
+dest_files=[ "res://.import/SM_Wall.glb-b1008a679579834c20dfe85bd8da27d4.scn" ]
 
 [params]
 
