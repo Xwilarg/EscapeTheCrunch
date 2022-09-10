@@ -34,7 +34,7 @@ func advance():
 		# Calculate the velocity.
 		vel = (target_point - pos).slide(n).normalized() * speed;
 	move_and_slide(vel, Vector3(0, 1, 0));
-	look_at(transform.origin + vel, Vector3.UP)
+	look_at(transform.origin - vel, Vector3.UP)
 
 func _physics_process(delta):
 	if target.distance_to(self.translation) < 2.5:
@@ -49,7 +49,7 @@ func _physics_process(delta):
 		advance();
 	
 	var from = self.translation + Vector3(0, 1, 0)
-	var to = from + global_transform.basis.y * 100
+	var to = from + global_transform.basis.z * 100
 	var result = get_world().direct_space_state.intersect_ray(from, to)
-	if result:
+	if result and "Player" in result.collider.name:
 		print(result.collider.name)
