@@ -12,10 +12,13 @@ func _ready():
 	pass;
 
 var PlayD = preload("res://Resources/Player/Dummy/PlayerDummy.tscn");
+var BossD = preload("res://Resources/Boss/Dummy/BossDummy.tscn");
 
 func create_entity(UInfo):
 	var Instance;
 	if UInfo["type"] == "Player":
+		Instance = PlayD.instance();
+	elif UInfo["type"] == "Boss":
 		Instance = PlayD.instance();
 	else:
 		pass
@@ -31,6 +34,8 @@ func prepare_packet(obj):
 	packet["name"] = obj.get_name();
 	if "Player" in obj.get_name():
 		packet["type"] = "Player";
+	elif "Boss" in obj.get_name():
+		packet["type"] = "Boss";
 	else:
 		packet["type"] = "terrain";
 	packet["pos"] = obj.translation;
@@ -62,22 +67,22 @@ remote func r_refresh_game(s_NewGameWorld):
 		if (_x["name"] != Network.playerID):
 			if (GameWorld.find(_x["name"]) == -1):
 					create_entity(_x);
-			tmp = get_node_or_null("/root/Spatial/MeshInstance/" + _x["name"]);
+			tmp = get_node_or_null("/root/FPSController/Navigation/" + _x["name"]);
 			if tmp:
 				update_unit(_x, tmp);
 			GameWorld.erase(_x);
 		#if GameWorld.size() > 0:
 		#	for _x in GameWorld:
-	tmp = get_node_or_null("/root/Spatial/MeshInstance/" + Network.playerID);
+	tmp = get_node_or_null("/root/FPSController/Navigation/" + Network.playerID);
 	if tmp:
 		var toSend = prepare_packet(tmp);
 		rpc_id(1, "r_update_player", toSend);
 	
 remote func r_update_player(toUpdate):
-	var currentData = get_node_or_null("/root/Spatial/MeshInstance/" + toUpdate["name"]);
+	var currentData = get_node_or_null("/root/FPSController/Navigation/" + toUpdate["name"]);
 	if currentData:
 		update_unit(toUpdate, currentData);
 	else:
 		create_entity(toUpdate);
-		currentData = get_node_or_null("/root/Spatial/MeshInstance/" + toUpdate["name"]);
+		currentData = get_node_or_null("/root/FPSController/Navigation/" + toUpdate["name"]);
 		update_unit(toUpdate, currentData);

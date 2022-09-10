@@ -25,13 +25,13 @@ func _ready() -> void:
 func spawn_player(nom) -> void:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	var spawns = get_node("/root/Spatial/MeshInstance/Spawns").get_children()
+	var spawns = get_node("/root/FPSController/Navigation/Spawns").get_children()
 	var pl = load("res://Resources/Scenes/Player.tscn")
 	var nb = rng.randi_range(0, spawns.size() - 1)
 	var instance = pl.instance()
 	instance.name = nom;
 	instance.translation = spawns[nb].translation;
-	get_node("/root/Spatial/MeshInstance/").add_child(instance);
+	get_node("/root/FPSController/Navigation/").add_child(instance);
 
 func create_server() -> void:
 	print("creating server");
@@ -40,9 +40,9 @@ func create_server() -> void:
 	get_tree().set_network_peer(server);
 	playerID = "PlayerServer"
 	spawn_player(playerID);
-	var timer = get_node("/root/Spatial/Timer");
+	var timer = get_node("/root/FPSController/Timer");
 	timer.set_wait_time(0.05);
-	timer.connect("timeout", get_node("/root/Spatial/MeshInstance/"), "_refresh_game");
+	timer.connect("timeout", get_node("/root/FPSController/Navigation/"), "_refresh_game");
 	timer.start();
 
 func join_server() -> void:
