@@ -12,7 +12,7 @@ func _ready():
 	nodes = get_node("../Spawns").get_children()
 	indexes = range(nodes.size())
 	safePrefab = load("res://Resources//Scenes/Safe.tscn")
-
+	respawn()
 
 func respawn():
 	var nb = rng.randi_range(0, indexes.size() - 1)
