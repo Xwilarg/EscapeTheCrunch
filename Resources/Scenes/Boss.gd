@@ -49,3 +49,9 @@ func _physics_process(delta):
 			target = self.translation
 	else:
 		advance();
+	
+	var from = self.translation + Vector3(0, 1, 0)
+	var to = from + global_transform.basis.y * 100
+	var result = get_world().direct_space_state.intersect_ray(from, to)
+	if result:
+		print(result.collider.name)
