@@ -1,23 +1,35 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Resources/Rooms/SquareRoom.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Resources/Scenes/Door.gd" type="Script" id=2]
 [ext_resource path="res://Resources/Rooms/Corridor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Resources/Rooms/SM_Wall.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Resources/Rooms/Corner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Resources/Assets/Jail/SM_JailWall.glb" type="PackedScene" id=6]
+[ext_resource path="res://Resources/Assets/Jail/SM_JailDoorWall.glb" type="PackedScene" id=7]
+[ext_resource path="res://Resources/Assets/Jail/SM_JailDoor.glb" type="PackedScene" id=8]
 
 [sub_resource type="BoxShape" id=4]
 
 [sub_resource type="CubeMesh" id=5]
 
+[sub_resource type="BoxShape" id=14]
+extents = Vector3( 0.451692, 1, 0.146373 )
+
 [sub_resource type="BoxShape" id=6]
-extents = Vector3( 5, 1, 3 )
+extents = Vector3( 4, 1, 3 )
 
 [sub_resource type="CubeMesh" id=8]
 size = Vector3( 14, 2, 16 )
 
 [sub_resource type="CubeMesh" id=9]
 size = Vector3( 8, 2, 6 )
+
+[sub_resource type="BoxShape" id=12]
+extents = Vector3( 0.991477, 1.24682, 0.139642 )
+
+[sub_resource type="BoxShape" id=13]
+extents = Vector3( 0.242552, 1.33218, 0.149264 )
 
 [sub_resource type="CubeMesh" id=10]
 size = Vector3( 10, 2, 6 )
@@ -32,10 +44,10 @@ size = Vector3( 10, 2, 6 )
 [node name="Spawns" type="Spatial" parent="Map"]
 
 [node name="Node" type="Spatial" parent="Map/Spawns"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.706, 1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.9835, 1, -17.6069 )
 
 [node name="Node2" type="Spatial" parent="Map/Spawns"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 16.043 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.62428, 1, -17.2207 )
 
 [node name="Door" type="StaticBody" parent="Map"]
 transform = Transform( 1, 0, 0, 0, 1.77786, 0, 0, 0, 0.216145, 0.0129588, 1.75241, 5.07373 )
@@ -49,6 +61,15 @@ mesh = SubResource( 5 )
 
 [node name="Jail" type="Spatial" parent="Map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -20 )
+
+[node name="JailDoor" type="StaticBody" parent="Map"]
+
+[node name="SM_JailDoor" parent="Map/JailDoor" instance=ExtResource( 8 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 25, 0, -20 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Map/JailDoor"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 25, 1.05918, -20 )
+shape = SubResource( 14 )
 
 [node name="SpawnRoom" parent="." instance=ExtResource( 1 )]
 
@@ -101,15 +122,6 @@ transform = Transform( -2.06632e-07, 0, -1, 0, 1, 0, 1, 0, -2.06632e-07, 20, 0, 
 
 [node name="SM_Wall" parent="SpawnRoom4" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
-
-[node name="SpawnRoom6" parent="." instance=ExtResource( 1 )]
-transform = Transform( 3.27826e-07, 0, 1, 0, 1, 0, -1, 0, 3.27826e-07, 30, 0, -20 )
-
-[node name="SM_Wall" parent="SpawnRoom6" instance=ExtResource( 4 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, -1.90735e-06 )
-
-[node name="SM_Wall2" parent="SpawnRoom6" instance=ExtResource( 4 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5, 0, -1.90735e-06 )
 
 [node name="Corridor2" parent="." instance=ExtResource( 3 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -10 )
@@ -261,6 +273,134 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -7 )
 
 [node name="SM_Wall11" parent="SmallCorridor/Walls" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -7 )
+
+[node name="SmallCorridor8" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, -16 )
+
+[node name="Floor" type="StaticBody" parent="SmallCorridor8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor8/Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, 0 )
+shape = SubResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="SmallCorridor8/Floor/CollisionShape"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00978303, 0 )
+mesh = SubResource( 9 )
+
+[node name="Walls" type="Spatial" parent="SmallCorridor8"]
+
+[node name="SM_JailWall" parent="SmallCorridor8/Walls" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1 )
+
+[node name="StaticBody" type="StaticBody" parent="SmallCorridor8/Walls/SM_JailWall"]
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor8/Walls/SM_JailWall/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25035, 0 )
+shape = SubResource( 12 )
+
+[node name="SM_JailWall2" parent="SmallCorridor8/Walls" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1 )
+
+[node name="StaticBody" type="StaticBody" parent="SmallCorridor8/Walls/SM_JailWall2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor8/Walls/SM_JailWall2/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25035, 0 )
+shape = SubResource( 12 )
+
+[node name="SM_JailWall3" parent="SmallCorridor8/Walls" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1 )
+
+[node name="StaticBody" type="StaticBody" parent="SmallCorridor8/Walls/SM_JailWall3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor8/Walls/SM_JailWall3/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25035, 0 )
+shape = SubResource( 12 )
+
+[node name="SM_JailWall4" parent="SmallCorridor8/Walls" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1 )
+
+[node name="StaticBody" type="StaticBody" parent="SmallCorridor8/Walls/SM_JailWall4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor8/Walls/SM_JailWall4/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25035, 0 )
+shape = SubResource( 12 )
+
+[node name="SM_JailWall5" parent="SmallCorridor8/Walls" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -7 )
+
+[node name="StaticBody" type="StaticBody" parent="SmallCorridor8/Walls/SM_JailWall5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor8/Walls/SM_JailWall5/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25035, 0 )
+shape = SubResource( 12 )
+
+[node name="SM_JailWall6" parent="SmallCorridor8/Walls" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -7 )
+
+[node name="StaticBody" type="StaticBody" parent="SmallCorridor8/Walls/SM_JailWall6"]
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor8/Walls/SM_JailWall6/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25035, 0 )
+shape = SubResource( 12 )
+
+[node name="SM_JailWall7" parent="SmallCorridor8/Walls" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -7 )
+
+[node name="StaticBody" type="StaticBody" parent="SmallCorridor8/Walls/SM_JailWall7"]
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor8/Walls/SM_JailWall7/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25035, 0 )
+shape = SubResource( 12 )
+
+[node name="SM_JailWall9" parent="SmallCorridor8/Walls" instance=ExtResource( 6 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, -2 )
+
+[node name="StaticBody" type="StaticBody" parent="SmallCorridor8/Walls/SM_JailWall9"]
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor8/Walls/SM_JailWall9/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25035, 0 )
+shape = SubResource( 12 )
+
+[node name="SM_JailWall10" parent="SmallCorridor8/Walls" instance=ExtResource( 6 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, -4 )
+
+[node name="StaticBody" type="StaticBody" parent="SmallCorridor8/Walls/SM_JailWall10"]
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor8/Walls/SM_JailWall10/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25035, 0 )
+shape = SubResource( 12 )
+
+[node name="SM_JailWall11" parent="SmallCorridor8/Walls" instance=ExtResource( 6 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, -6 )
+
+[node name="StaticBody" type="StaticBody" parent="SmallCorridor8/Walls/SM_JailWall11"]
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor8/Walls/SM_JailWall11/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25035, 0 )
+shape = SubResource( 12 )
+
+[node name="SM_JailWall8" parent="SmallCorridor8/Walls" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -7 )
+
+[node name="StaticBody" type="StaticBody" parent="SmallCorridor8/Walls/SM_JailWall8"]
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor8/Walls/SM_JailWall8/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25035, 0 )
+shape = SubResource( 12 )
+
+[node name="SM_JailDoorWall" parent="SmallCorridor8/Walls" instance=ExtResource( 7 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, -4 )
+
+[node name="StaticBody" type="StaticBody" parent="SmallCorridor8/Walls/SM_JailDoorWall"]
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor8/Walls/SM_JailDoorWall/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.700209, 1.15624, 0 )
+shape = SubResource( 13 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="SmallCorridor8/Walls/SM_JailDoorWall/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.704342, 1.15624, 0 )
+shape = SubResource( 13 )
 
 [node name="SmallCorridor2" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -24 )
