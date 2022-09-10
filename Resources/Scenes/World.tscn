@@ -1,17 +1,29 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Resources/Assets/Walls/SM_Wall.glb" type="PackedScene" id=1]
+[ext_resource path="res://Resources/Rooms/SquareRoom.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Resources/Scenes/Door.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Rooms/Corridor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Resources/Rooms/SM_Wall.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Resources/Rooms/Corner.tscn" type="PackedScene" id=5]
 
 [sub_resource type="BoxShape" id=4]
 
 [sub_resource type="CubeMesh" id=5]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 5, 1, 5 )
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 5, 1, 3 )
 
-[sub_resource type="CubeMesh" id=2]
-size = Vector3( 10, 2, 10 )
+[sub_resource type="CubeMesh" id=8]
+size = Vector3( 14, 2, 16 )
+
+[sub_resource type="CubeMesh" id=9]
+size = Vector3( 8, 2, 6 )
+
+[sub_resource type="CubeMesh" id=10]
+size = Vector3( 10, 2, 6 )
+
+[sub_resource type="CubeMesh" id=11]
+size = Vector3( 10, 2, 6 )
 
 [node name="World" type="Spatial"]
 
@@ -35,64 +47,403 @@ shape = SubResource( 4 )
 [node name="MeshInstance" type="MeshInstance" parent="Map/Door/CollisionShape"]
 mesh = SubResource( 5 )
 
-[node name="SpawnRoom" type="Spatial" parent="."]
+[node name="SpawnRoom" parent="." instance=ExtResource( 1 )]
 
-[node name="Floor" type="StaticBody" parent="SpawnRoom"]
+[node name="Corridor" parent="." instance=ExtResource( 3 )]
+
+[node name="Corridor3" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0 )
+
+[node name="Corridor10" parent="." instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -18, 0, -18 )
+
+[node name="Corridor5" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 0 )
+
+[node name="Corridor6" parent="." instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 38, 0, -8 )
+
+[node name="Corridor7" parent="." instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 38, 0, -18 )
+
+[node name="Corridor9" parent="." instance=ExtResource( 3 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 30, 0, -30 )
+
+[node name="Corridor11" parent="." instance=ExtResource( 3 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 12, 0, -38 )
+
+[node name="Corridor13" parent="." instance=ExtResource( 3 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -8, 0, -38 )
+
+[node name="Corridor8" parent="." instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 20, 0, -10 )
+
+[node name="SpawnRoom2" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0 )
+
+[node name="SM_Wall" parent="SpawnRoom2" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
+
+[node name="SpawnRoom3" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1.19209e-07, 0, 1, 0, 1, 0, -1, 0, 1.19209e-07, 20, 0, -20 )
+
+[node name="SM_Wall" parent="SpawnRoom3" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
+
+[node name="SpawnRoom5" parent="." instance=ExtResource( 1 )]
+transform = Transform( -2.06632e-07, 0, -1, 0, 1, 0, 1, 0, -2.06632e-07, -18, 0, -28 )
+
+[node name="SM_Wall" parent="SpawnRoom5" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
+
+[node name="SpawnRoom4" parent="." instance=ExtResource( 1 )]
+transform = Transform( -2.06632e-07, 0, -1, 0, 1, 0, 1, 0, -2.06632e-07, 20, 0, -30 )
+
+[node name="SM_Wall" parent="SpawnRoom4" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
+
+[node name="Corridor2" parent="." instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -10 )
+
+[node name="Corridor4" parent="." instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -18, 0, -8 )
+
+[node name="Corner" parent="." instance=ExtResource( 5 )]
+
+[node name="Corner3" parent="." instance=ExtResource( 5 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 20, 0, -38 )
+
+[node name="Corner2" parent="." instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 38, 0, 0 )
+
+[node name="Corner4" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -18, 0, -38 )
+
+[node name="MainRoom" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19 )
+
+[node name="Floor" type="StaticBody" parent="MainRoom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="MainRoom/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 6 )
 
-[node name="CollisionShape" type="CollisionShape" parent="SpawnRoom/Floor"]
-shape = SubResource( 1 )
+[node name="MeshInstance" type="MeshInstance" parent="MainRoom/Floor/CollisionShape"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00978303, 0 )
+mesh = SubResource( 8 )
 
-[node name="MeshInstance" type="MeshInstance" parent="SpawnRoom/Floor/CollisionShape"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00261211, 0, -0.0217457 )
-mesh = SubResource( 2 )
+[node name="Walls" type="Spatial" parent="MainRoom"]
 
-[node name="Walls" type="Spatial" parent="SpawnRoom"]
+[node name="SM_Wall" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4 )
 
-[node name="SM_Wall11" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -5 )
+[node name="SM_Wall21" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4 )
 
-[node name="SM_Wall12" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -5 )
+[node name="SM_Wall22" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 4 )
 
-[node name="SM_Wall" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -5 )
+[node name="SM_Wall23" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -12 )
 
-[node name="SM_Wall2" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -5 )
+[node name="SM_Wall24" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -12 )
 
-[node name="SM_Wall3" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, -4 )
+[node name="SM_Wall25" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -12 )
 
-[node name="SM_Wall4" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
-transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 5, 0, -2 )
+[node name="SM_Wall26" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12 )
 
-[node name="SM_Wall5" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
-transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 5, 0, 4 )
+[node name="SM_Wall28" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -12 )
 
-[node name="SM_Wall6" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
-transform = Transform( -2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 5, 0, 2 )
+[node name="SM_Wall29" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -12 )
 
-[node name="SM_Wall7" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
-transform = Transform( 3.0598e-07, 0, 1, 0, 1, 0, -1, 0, 3.0598e-07, -5, 0, 4 )
+[node name="SM_Wall2" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4 )
 
-[node name="SM_Wall8" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
-transform = Transform( -3.93403e-07, 0, -1, 0, 1, 0, 1, 0, -3.93403e-07, -5, 0, 2 )
+[node name="SM_Wall5" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, 3 )
 
-[node name="SM_Wall9" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
-transform = Transform( -3.93403e-07, 0, -1, 0, 1, 0, 1, 0, -3.93403e-07, -5, 0, -4 )
+[node name="SM_Wall6" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, 1 )
 
-[node name="SM_Wall10" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
-transform = Transform( 4.80825e-07, 0, 1, 0, 1, 0, -1, 0, 4.80825e-07, -5, 0, -2 )
+[node name="SM_Wall8" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, -3 )
 
-[node name="SM_Wall13" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 5 )
+[node name="SM_Wall9" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, -5 )
 
-[node name="SM_Wall14" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 5 )
+[node name="SM_Wall10" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, -7 )
 
-[node name="SM_Wall15" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5 )
+[node name="SM_Wall11" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, -9 )
 
-[node name="SM_Wall16" parent="SpawnRoom/Walls" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 5 )
+[node name="SM_Wall12" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, -11 )
+
+[node name="SM_Wall13" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 0, 3 )
+
+[node name="SM_Wall14" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 0, 1 )
+
+[node name="SM_Wall15" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 0, -1 )
+
+[node name="SM_Wall16" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 0, -3 )
+
+[node name="SM_Wall17" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 0, -5 )
+
+[node name="SM_Wall18" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 0, -7 )
+
+[node name="SM_Wall20" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 0, -11 )
+
+[node name="SM_Wall3" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 4 )
+
+[node name="SM_Wall4" parent="MainRoom/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4 )
+
+[node name="SmallCorridor" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -16 )
+
+[node name="Floor" type="StaticBody" parent="SmallCorridor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor/Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, 0 )
+shape = SubResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="SmallCorridor/Floor/CollisionShape"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00978303, 0 )
+mesh = SubResource( 9 )
+
+[node name="Walls" type="Spatial" parent="SmallCorridor"]
+
+[node name="SM_Wall4" parent="SmallCorridor/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1 )
+
+[node name="SM_Wall5" parent="SmallCorridor/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1 )
+
+[node name="SM_Wall6" parent="SmallCorridor/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1 )
+
+[node name="SM_Wall7" parent="SmallCorridor/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1 )
+
+[node name="SM_Wall8" parent="SmallCorridor/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -7 )
+
+[node name="SM_Wall9" parent="SmallCorridor/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -7 )
+
+[node name="SM_Wall10" parent="SmallCorridor/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -7 )
+
+[node name="SM_Wall11" parent="SmallCorridor/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -7 )
+
+[node name="SmallCorridor2" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -24 )
+
+[node name="Floor" type="StaticBody" parent="SmallCorridor2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor2/Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1, 0 )
+shape = SubResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="SmallCorridor2/Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1.00978, 0 )
+mesh = SubResource( 10 )
+skeleton = NodePath("../CollisionShape")
+
+[node name="Walls" type="Spatial" parent="SmallCorridor2"]
+
+[node name="SM_Wall5" parent="SmallCorridor2/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1 )
+
+[node name="SM_Wall6" parent="SmallCorridor2/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1 )
+
+[node name="SM_Wall7" parent="SmallCorridor2/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1 )
+
+[node name="SM_Wall9" parent="SmallCorridor2/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -7 )
+
+[node name="SM_Wall10" parent="SmallCorridor2/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -7 )
+
+[node name="SM_Wall11" parent="SmallCorridor2/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -7 )
+
+[node name="SmallCorridor4" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -22, 0, -31 )
+
+[node name="Floor" type="StaticBody" parent="SmallCorridor4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor4/Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1, 0 )
+shape = SubResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="SmallCorridor4/Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1.00978, 0 )
+mesh = SubResource( 10 )
+skeleton = NodePath("../CollisionShape")
+
+[node name="Walls" type="Spatial" parent="SmallCorridor4"]
+
+[node name="SM_Wall6" parent="SmallCorridor4/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1 )
+
+[node name="SM_Wall10" parent="SmallCorridor4/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -7 )
+
+[node name="SmallCorridor5" type="Spatial" parent="."]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -17, 0, -42 )
+
+[node name="Floor" type="StaticBody" parent="SmallCorridor5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor5/Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1, 0 )
+shape = SubResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="SmallCorridor5/Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1.00978, 0 )
+mesh = SubResource( 10 )
+skeleton = NodePath("../CollisionShape")
+
+[node name="Walls" type="Spatial" parent="SmallCorridor5"]
+
+[node name="SM_Wall6" parent="SmallCorridor5/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1 )
+
+[node name="SM_Wall10" parent="SmallCorridor5/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -7 )
+
+[node name="SmallCorridor6" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 0, -30 )
+
+[node name="Floor" type="StaticBody" parent="SmallCorridor6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor6/Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1, 0 )
+shape = SubResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="SmallCorridor6/Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1.00978, -1.19209e-07 )
+mesh = SubResource( 10 )
+skeleton = NodePath("../CollisionShape")
+
+[node name="Walls" type="Spatial" parent="SmallCorridor6"]
+
+[node name="SM_Wall6" parent="SmallCorridor6/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1 )
+
+[node name="SM_Wall10" parent="SmallCorridor6/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -7 )
+
+[node name="SM_Wall7" parent="SmallCorridor6/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1 )
+
+[node name="SM_Wall11" parent="SmallCorridor6/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -7 )
+
+[node name="SmallCorridor7" type="Spatial" parent="."]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1, 0, -42 )
+
+[node name="Floor" type="StaticBody" parent="SmallCorridor7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor7/Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1, 0 )
+shape = SubResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="SmallCorridor7/Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1.00978, -1.19209e-07 )
+mesh = SubResource( 10 )
+skeleton = NodePath("../CollisionShape")
+
+[node name="Walls" type="Spatial" parent="SmallCorridor7"]
+
+[node name="SM_Wall11" parent="SmallCorridor7/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -7 )
+
+[node name="SM_Wall12" parent="SmallCorridor7/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.999999, 0, -7 )
+
+[node name="SM_Wall13" parent="SmallCorridor7/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1 )
+
+[node name="SM_Wall14" parent="SmallCorridor7/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1 )
+
+[node name="SM_Wall15" parent="SmallCorridor7/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1 )
+
+[node name="SM_Wall16" parent="SmallCorridor7/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1 )
+
+[node name="SM_Wall17" parent="SmallCorridor7/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -1 )
+
+[node name="SmallCorridor3" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 34, 0, -24 )
+
+[node name="Floor" type="StaticBody" parent="SmallCorridor3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SmallCorridor3/Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -1, 0 )
+shape = SubResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="SmallCorridor3/Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -1.00978, 0 )
+mesh = SubResource( 11 )
+skeleton = NodePath("../CollisionShape")
+
+[node name="Walls" type="Spatial" parent="SmallCorridor3"]
+
+[node name="SM_Wall11" parent="SmallCorridor3/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7 )
+
+[node name="SM_Wall12" parent="SmallCorridor3/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -7 )
+
+[node name="SM_Wall13" parent="SmallCorridor3/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -7 )
+
+[node name="SM_Wall14" parent="SmallCorridor3/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -7 )
+
+[node name="SM_Wall15" parent="SmallCorridor3/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -7 )
+
+[node name="SM_Wall16" parent="SmallCorridor3/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90735e-06, 0, -1 )
+
+[node name="SM_Wall17" parent="SmallCorridor3/Walls" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1 )
+
+[node name="SM_Wall18" parent="SmallCorridor3/Walls" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9, 0, -2 )
+
+[node name="SM_Wall19" parent="SmallCorridor3/Walls" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9, 0, -4 )
+
+[node name="SM_Wall20" parent="SmallCorridor3/Walls" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9, 0, -6 )
