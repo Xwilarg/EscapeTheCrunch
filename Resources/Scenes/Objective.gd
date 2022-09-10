@@ -10,3 +10,6 @@ func setId(value: int):
 	print("ID set to ", id)
 
 var id: int
+
+func _physics_process(delta):
+	rotate_y(delta)
