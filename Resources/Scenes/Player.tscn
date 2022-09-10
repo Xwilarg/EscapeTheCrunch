@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Resources/Scenes/PlayerController.gd" type="Script" id=1]
+[ext_resource path="res://Resources/BGM/Spooky_office_-_SHGJ.mp3" type="AudioStream" id=2]
 
 [sub_resource type="CapsuleShape" id=3]
 
@@ -26,3 +27,9 @@ margin_right = 40.0
 margin_bottom = 14.0
 align = 1
 valign = 1
+
+[node name="BGMCalm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+
+[node name="BGMChase" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
