@@ -96,7 +96,7 @@ uv1_scale = Vector3( 10, 6, 6 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.9835, 1, -17.6069 )
 
 [node name="Node2" type="Spatial" parent="Map/Spawns"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.62428, 1, -17.2207 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.3757, 1, -23.2207 )
 
 [node name="Door" type="StaticBody" parent="Map"]
 transform = Transform( 1, 0, 0, 0, 1.77786, 0, 0, 0, 0.216145, 0.0129588, 1.75241, 5.07373 )
