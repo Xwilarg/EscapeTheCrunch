@@ -70,9 +70,12 @@ remote func r_refresh_game(s_NewGameWorld):
 			tmp = get_node_or_null("/root/FPSController/Navigation/" + _x["name"]);
 			if tmp:
 				update_unit(_x, tmp);
-			GameWorld.erase(_x);
-		#if GameWorld.size() > 0:
-		#	for _x in GameWorld:
+		GameWorld.erase(_x);
+	if GameWorld.size() > 0:
+		for _x in GameWorld:
+			tmp = get_node_or_null("/root/FPSController/Navigation/" + _x["name"]);
+			if tmp:
+				tmp.free();
 	tmp = get_node_or_null("/root/FPSController/Navigation/" + Network.playerID);
 	if tmp:
 		var toSend = prepare_packet(tmp);

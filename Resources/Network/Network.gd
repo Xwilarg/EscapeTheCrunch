@@ -95,13 +95,17 @@ func _peer_connected(id):
 	print(teams);
 
 func _peer_disconnected(id):
-	var i = 0;
+	var i = -1;
 	while i < peers.size():
+		i += 1;
 		if peers[i] == id:
 			peers.pop_at(i);
 			teams.pop_at(i);
-		i += 1;
-	peers.erase(id);
+	
+	var tmp = get_node_or_null("/root/FPSController/Navigation/Player" + id);
+	if tmp:
+		tmp.free();
+	
 	print("Player id: " + str(id) + " disconnected");
 	print(peers);
 
