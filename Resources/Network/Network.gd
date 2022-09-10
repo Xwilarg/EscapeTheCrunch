@@ -44,6 +44,24 @@ func spawn_boss(nom) -> void:
 	instance.translation = spawns[nb].translation;
 	get_node("/root/FPSController/Navigation/").add_child(instance);
 
+func move_entity(nom, pos) -> void:
+	if "Server" in nom || "Boss" in nom:
+		var tmp = get_node_or_null("/root/FPSController/Navigation/" + nom);
+		if tmp:
+			tmp.translation = pos;
+	else:
+		var id = "-1";
+		for _x in peers:
+			if _x in nom:
+				id = _x;
+		if id != "-1":
+			rpc_id(id, "p_teleport", pos)
+
+puppet func p_teleport(pos) -> void:
+	var tmp = get_node_or_null("/root/FPSController/Navigation/" + playerID);
+	if tmp:
+		tmp.translation = pos;
+
 func create_server() -> void:
 	print("creating server");
 	server = NetworkedMultiplayerENet.new();
@@ -89,7 +107,8 @@ static func sort_ascending(a, b):
 func _peer_connected(id):
 	peers.append(id);
 	teams.append(0);
-	rpc_id(id, "r_init_player", "Player" + str(id));
+	if server != null:
+		rpc_id(id, "r_init_player", "Player" + str(id));
 	print("Player id: " + str(id) + " connected");
 	print(peers);
 	print(teams);
@@ -102,7 +121,7 @@ func _peer_disconnected(id):
 			peers.pop_at(i);
 			teams.pop_at(i);
 	
-	var tmp = get_node_or_null("/root/FPSController/Navigation/Player" + id);
+	var tmp = get_node_or_null("/root/FPSController/Navigation/Player" + str(id));
 	if tmp:
 		tmp.free();
 	
