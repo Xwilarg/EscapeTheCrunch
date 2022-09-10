@@ -50,11 +50,11 @@ func move_entity(nom, pos) -> void:
 		if tmp:
 			tmp.translation = pos;
 	else:
-		var id = "-1";
+		var id = -1;
 		for _x in peers:
-			if _x in nom:
+			if str(_x) in nom:
 				id = _x;
-		if id != "-1":
+		if id != -1:
 			rpc_id(id, "p_teleport", pos)
 
 puppet func p_teleport(pos) -> void:
