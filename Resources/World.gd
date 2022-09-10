@@ -30,7 +30,10 @@ func create_entity(UInfo):
 	self.add_child(Instance);
 
 func update_unit(NewData, currentUnit):
-	currentUnit.move_to(NewData["pos"]);
+	if NewData["type"] != "Safe":
+		currentUnit.move_to(NewData["pos"]);
+	else:
+		currentUnit.translation = NewData["pos"];
 
 func prepare_packet(obj):
 	var packet = {};
