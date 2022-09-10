@@ -68,7 +68,7 @@ func _physics_process(delta):
 		if currentKey == null:
 			label.set_text("You need to find the key first!")
 		else:
-			pass 
+			label.hide()
 			# End of the game!
 	else:
 		safeTarget = null
