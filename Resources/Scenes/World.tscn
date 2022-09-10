@@ -2,44 +2,17 @@
 
 [ext_resource path="res://Resources/Scenes/Door.gd" type="Script" id=2]
 
+[sub_resource type="BoxShape" id=4]
+
+[sub_resource type="CubeMesh" id=5]
+
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 20, 1, 20 )
 
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 40, 2, 40 )
 
-[sub_resource type="BoxShape" id=4]
-
-[sub_resource type="CubeMesh" id=5]
-
 [node name="World" type="Spatial"]
-
-[node name="Floor" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Floor"]
-shape = SubResource( 1 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Floor/CollisionShape"]
-mesh = SubResource( 2 )
-
-[node name="Obstacle" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.38746, 1.65475, 0 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Obstacle"]
-shape = SubResource( 4 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Obstacle/CollisionShape"]
-mesh = SubResource( 5 )
-
-[node name="Obstacle" type="StaticBody" parent="Obstacle"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.378, 0.344956, 0 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Obstacle/Obstacle"]
-shape = SubResource( 4 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Obstacle/Obstacle/CollisionShape"]
-mesh = SubResource( 5 )
 
 [node name="Map" type="Node" parent="."]
 
@@ -61,12 +34,13 @@ shape = SubResource( 4 )
 [node name="MeshInstance" type="MeshInstance" parent="Map/Door/CollisionShape"]
 mesh = SubResource( 5 )
 
-[node name="StaticBody2" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.99054, 1.99971, 0 )
+[node name="SpawnRoom" type="Spatial" parent="."]
 
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.994401, 0 )
-shape = SubResource( 4 )
+[node name="Floor" type="StaticBody" parent="SpawnRoom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 
-[node name="MeshInstance" type="MeshInstance" parent="StaticBody2/CollisionShape"]
-mesh = SubResource( 5 )
+[node name="CollisionShape" type="CollisionShape" parent="SpawnRoom/Floor"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="SpawnRoom/Floor/CollisionShape"]
+mesh = SubResource( 2 )
