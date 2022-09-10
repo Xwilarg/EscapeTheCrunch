@@ -17,7 +17,7 @@ func registerPlayer(p: Object) -> void:
 	instance.setId(nb)
 	instance.translation = nodes[nb].translation
 	indexes.erase(nb)
-	self.add_child(instance);
+	nodes[nb].add_child(instance);
 
 func removePlayer(p: Object) -> void:
 	players.erase(p)
