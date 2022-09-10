@@ -13,6 +13,9 @@ var safeTarget: Object
 var id = 1
 var currentKey: Object = null
 
+var bgmCalm: Object
+var bgmChase: Object
+
 func isReadyToExit() -> bool:
 	return currentKey != null and isOnDoorRange()
 
@@ -21,10 +24,20 @@ func isOnDoorRange() -> bool:
 
 func _ready():
 	door = get_node("../NavigationMeshInstance/World/Map/Door")
-	get_node("/root/FPSController/BGM").play()
+	bgmCalm = get_node("BGMCalm")
+	bgmChase = get_node("BGMChase")
+	bgmCalm.play()
 	label = get_node("Label")
 	label.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func setBGMCalm():
+	bgmChase.stop()
+	bgmCalm.play()
+	
+func setBGMChase():
+	bgmChase.play()
+	bgmCalm.stop()
 
 func _input(event):         
 	if event is InputEventMouseMotion:
