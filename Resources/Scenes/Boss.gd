@@ -33,6 +33,9 @@ func advance():
 	if pos.distance_to(target_point) > 1:
 		# Calculate the velocity.
 		vel = (target_point - pos).slide(n).normalized() * speed;
+	var angle = Vector2(pos.x, pos.z).angle_to_point(Vector2(target_point.x, target_point.z));
+	print(angle);
+	self.set_rotation(Vector3(0, angle, 0));
 	move_and_slide(vel, Vector3(0, 1, 0));
 
 func _physics_process(delta):

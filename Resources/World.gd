@@ -27,7 +27,9 @@ func create_entity(UInfo):
 	self.add_child(Instance);
 
 func update_unit(NewData, currentUnit):
-	currentUnit.translation = NewData["pos"];
+	if (currentUnit.translation.distance_to(NewData["pos"]) > 1.5):
+		currentUnit.translation = NewData["pos"];
+	currentUnit.move_to(NewData["pos"]);
 
 func prepare_packet(obj):
 	var packet = {};
