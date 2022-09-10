@@ -44,29 +44,29 @@ func advance():
 	if vel.length() > 0:
 		look_at(transform.origin - vel, Vector3.UP)
 
-func _physics_process(delta):
+func patrol():
 	if target.distance_to(self.translation) < 2.5:
-		if playerTarget != null:
-			playerTarget.setBGMCalm()
-			playerTarget = null
 		var spawns = get_node("/root/FPSController/Navigation/Waypoints").get_children()
 		if spawns.size() > 0:
 			var nb = rng.randi_range(0, spawns.size() - 1)
 			target = spawns[nb].translation;
-			$NavigationAgent.set_target_location(target);
 		else:
 			target = self.translation
-	else:
-		advance();
-	
+
+func check_chase():
 	var from = self.translation + Vector3(0, 1, 0)
 	var to = from + global_transform.basis.z * 100
 	var result = get_world().direct_space_state.intersect_ray(from, to)
 	if result and "Player" in result.collider.name:
-		$NavigationAgent.set_target_location(result.collider.translation);
-		if playerTarget != result.collider:
-			playerTarget = result.collider
-			playerTarget.setBGMChase()
+		target = result.collider.translation;
 		if global_transform.origin.distance_to(result.collider.global_transform.origin) < 1.1:
-			result.collider.translation = jail.translation
-			playerTarget.setBGMCalm()
+			Network.move_entity(result.collider.name, jail.translation);
+
+func set_target():
+	patrol();
+	check_chase();
+
+func _physics_process(delta):
+	set_target();
+	$NavigationAgent.set_target_location(target);
+	advance();
