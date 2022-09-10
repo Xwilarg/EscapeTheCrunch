@@ -33,6 +33,17 @@ func spawn_player(nom) -> void:
 	instance.translation = spawns[nb].translation;
 	get_node("/root/FPSController/Navigation/").add_child(instance);
 
+func spawn_boss(nom) -> void:
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var spawns = get_node("/root/FPSController/Navigation/Spawns").get_children()
+	var pl = load("res://Resources/Scenes/Boss.tscn")
+	var nb = rng.randi_range(0, spawns.size() - 1)
+	var instance = pl.instance()
+	instance.name = nom;
+	instance.translation = spawns[nb].translation;
+	get_node("/root/FPSController/Navigation/").add_child(instance);
+
 func create_server() -> void:
 	print("creating server");
 	server = NetworkedMultiplayerENet.new();
@@ -40,6 +51,7 @@ func create_server() -> void:
 	get_tree().set_network_peer(server);
 	playerID = "PlayerServer"
 	spawn_player(playerID);
+	spawn_boss("Boss 1");
 	var timer = get_node("/root/FPSController/Timer");
 	timer.set_wait_time(0.05);
 	timer.connect("timeout", get_node("/root/FPSController/Navigation/"), "_refresh_game");
