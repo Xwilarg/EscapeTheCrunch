@@ -21,7 +21,7 @@ func isOnDoorRange() -> bool:
 
 func _ready():
 	door = get_node("../NavigationMeshInstance/World/Map/Door")
-	door.registerPlayer(self)
+	get_node("/root/FPSController/BGM").play()
 	label = get_node("Label")
 	label.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
