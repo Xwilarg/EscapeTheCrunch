@@ -15,6 +15,7 @@ size = Vector3( 40, 2, 40 )
 [node name="World" type="Spatial"]
 
 [node name="Floor" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Floor"]
 shape = SubResource( 1 )
@@ -51,11 +52,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.706, 1, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 16.043 )
 
 [node name="Door" type="StaticBody" parent="Map"]
-transform = Transform( 1, 0, 0, 0, 1.77786, 0, 0, 0, 0.216145, 3.64811, 2.76716, -19.7909 )
+transform = Transform( 1, 0, 0, 0, 1.77786, 0, 0, 0, 0.216145, 3.64811, 1.75241, -19.7909 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Map/Door"]
 shape = SubResource( 4 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Map/Door/CollisionShape"]
+mesh = SubResource( 5 )
+
+[node name="StaticBody2" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.99054, 1.99971, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.994401, 0 )
+shape = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody2/CollisionShape"]
 mesh = SubResource( 5 )
