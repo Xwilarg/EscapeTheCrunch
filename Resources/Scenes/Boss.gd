@@ -67,3 +67,5 @@ func _physics_process(delta):
 	var result = get_world().direct_space_state.intersect_ray(from, to)
 	if result and "Player" in result.collider.name:
 		targetOverride = result.collider.translation
+		if global_transform.origin.distance_to(result.collider.global_transform.origin) < 1.1:
+			result.collider.translation = jail.translation
