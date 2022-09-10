@@ -47,6 +47,9 @@ shape = SubResource( 4 )
 [node name="MeshInstance" type="MeshInstance" parent="Map/Door/CollisionShape"]
 mesh = SubResource( 5 )
 
+[node name="Jail" type="Spatial" parent="Map"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -20 )
+
 [node name="SpawnRoom" parent="." instance=ExtResource( 1 )]
 
 [node name="Corridor" parent="." instance=ExtResource( 3 )]
