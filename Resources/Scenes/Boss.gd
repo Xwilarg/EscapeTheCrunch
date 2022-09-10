@@ -6,31 +6,43 @@ export var speed = 5
 
 var path = []
 
-var target: Object
-var nav: Object
+var rng = RandomNumberGenerator.new()
+
+var target = self.translation
 
 func _ready():
-	target = get_node("../Player")
-	nav = get_node("../Navigation")
+	rng.randomize()
+	var spawns = get_node("/root/FPSController/Navigation/Waypoints").get_children()
+	if spawns.size() > 0:
+		var nb = rng.randi_range(0, spawns.size() - 1)
+		target = spawns[nb].translation;
+		$NavigationAgent.set_target_location(target);
+	else:
+		target = self.translation
+	pass
+
+func advance():
+	var target_point = $NavigationAgent.get_next_location();
+	var pos = get_global_transform().origin;
+	var vel = Vector3(0, 0, 0);
+	# Floor normal.
+	var n = $RayCast.get_collision_normal();
+	if n.length_squared() < 0.001:
+		# Set normal to Y+ if on air.
+		n = Vector3(0, 1, 0);
+	if pos.distance_to(target_point) > 1:
+		# Calculate the velocity.
+		vel = (target_point - pos).slide(n).normalized() * speed;
+	move_and_slide(vel, Vector3(0, 1, 0));
 
 func _physics_process(delta):
-	var direction = Vector3()
-	var step_size = delta * speed
-
-	if path.size() > 0:
-		var destination = path[0]
-		direction = destination - self.translation
-
-		if step_size > direction.length():
-			step_size = direction.length()
-			path.remove(0)
-
-		self.translation += direction.normalized() * step_size
-
-		direction.y = 0
-		if direction:
-			var look_at_point = self.translation + direction.normalized()
-			self.look_at(look_at_point, Vector3.UP)
+	if target.distance_to(self.translation) < 2.5:
+		var spawns = get_node("/root/FPSController/Navigation/Waypoints").get_children()
+		if spawns.size() > 0:
+			var nb = rng.randi_range(0, spawns.size() - 1)
+			target = spawns[nb].translation;
+			$NavigationAgent.set_target_location(target);
+		else:
+			target = self.translation
 	else:
-		path = nav.get_simple_path(self.translation, target.translation, true)
-		print(path)
+		advance();

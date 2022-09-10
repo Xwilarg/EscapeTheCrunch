@@ -20,7 +20,7 @@ func isOnDoorRange() -> bool:
 	return global_transform.origin.distance_to(door.global_transform.origin) < doorDistance
 
 func _ready():
-	door = get_node("../Navigation/NavigationMeshInstance/World/Map/Door")
+	door = get_node("../NavigationMeshInstance/World/Map/Door")
 	door.registerPlayer(self)
 	label = get_node("Label")
 	label.hide()
