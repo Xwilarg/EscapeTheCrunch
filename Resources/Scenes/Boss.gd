@@ -43,6 +43,7 @@ func advance():
 	move_and_slide(vel, Vector3(0, 1, 0));
 	if vel.length() > 0:
 		look_at(transform.origin - vel, Vector3.UP)
+	self.translation[1] = 0;
 
 func patrol():
 	if target.distance_to(self.translation) < 2.5:
