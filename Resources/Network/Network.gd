@@ -102,7 +102,7 @@ func _peer_disconnected(id):
 			peers.pop_at(i);
 			teams.pop_at(i);
 	
-	var tmp = get_node_or_null("/root/FPSController/Navigation/Player" + id);
+	var tmp = get_node_or_null("/root/FPSController/Navigation/Player" + str(id));
 	if tmp:
 		tmp.free();
 	

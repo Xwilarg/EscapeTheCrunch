@@ -19,7 +19,7 @@ func create_entity(UInfo):
 	if UInfo["type"] == "Player":
 		Instance = PlayD.instance();
 	elif UInfo["type"] == "Boss":
-		Instance = PlayD.instance();
+		Instance = BossD.instance();
 	else:
 		pass
 	Instance.name = UInfo["name"];
@@ -27,8 +27,6 @@ func create_entity(UInfo):
 	self.add_child(Instance);
 
 func update_unit(NewData, currentUnit):
-	if (currentUnit.translation.distance_to(NewData["pos"]) > 1.5):
-		currentUnit.translation = NewData["pos"];
 	currentUnit.move_to(NewData["pos"]);
 
 func prepare_packet(obj):
@@ -62,6 +60,10 @@ remote func r_refresh_game(s_NewGameWorld):
 	var GameWorld = [];
 	var _i = 0;
 	var tmp = null;
+	tmp = get_node_or_null("/root/FPSController/Navigation/" + Network.playerID);
+	if tmp:
+		var toSend = prepare_packet(tmp);
+		rpc_id(1, "r_update_player", toSend);
 	while _i < self.get_child_count():
 		GameWorld.append(self.get_child(_i).name);
 		_i += 1;
@@ -78,10 +80,6 @@ remote func r_refresh_game(s_NewGameWorld):
 			tmp = get_node_or_null("/root/FPSController/Navigation/" + _x["name"]);
 			if tmp:
 				tmp.free();
-	tmp = get_node_or_null("/root/FPSController/Navigation/" + Network.playerID);
-	if tmp:
-		var toSend = prepare_packet(tmp);
-		rpc_id(1, "r_update_player", toSend);
 	
 remote func r_update_player(toUpdate):
 	var currentData = get_node_or_null("/root/FPSController/Navigation/" + toUpdate["name"]);
