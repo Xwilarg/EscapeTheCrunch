@@ -6,6 +6,7 @@ export var speedWalk = 5
 export var speedRun = 10
 
 var speed: int
+var jail: Object
 
 var targetOverride: Vector3	= Vector3.ZERO
 
@@ -16,6 +17,7 @@ var rng = RandomNumberGenerator.new()
 var target = self.translation
 
 func _ready():
+	jail = get_node("/root/FPSController/Navigation/NavigationMeshInstance/World/Map/Jail")
 	rng.randomize()
 	var spawns = get_node("/root/FPSController/Navigation/Waypoints").get_children()
 	if spawns.size() > 0:
