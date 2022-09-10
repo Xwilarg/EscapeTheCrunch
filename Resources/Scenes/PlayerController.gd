@@ -17,7 +17,7 @@ var bgmCalm: Object
 var bgmChase: Object
 
 func isReadyToExit() -> bool:
-	return currentKey != null and isOnDoorRange()
+	return currentKey and isOnDoorRange()
 
 func isOnDoorRange() -> bool:
 	return global_transform.origin.distance_to(door.global_transform.origin) < doorDistance
@@ -43,7 +43,7 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(deg2rad(event.relative.x * xSens))
 		$Camera.rotate_x(deg2rad(event.relative.y * xSens))
-	if Input.is_action_pressed("action") and safeTarget != null and currentKey == false:
+	if Input.is_action_pressed("action") and safeTarget != null and !currentKey:
 		currentKey = true;
 		Network.take_badge(Network.playerID);
 		label.hide()
@@ -77,13 +77,13 @@ func _physics_process(delta):
 	var from = $Camera.project_ray_origin(center)
 	var to = from + $Camera.project_ray_normal(center) * 100
 	var result = get_world().direct_space_state.intersect_ray(from, to)
-	if result and result.collider.name == "Safe" and global_transform.origin.distance_to(result.collider.global_transform.origin) < interactionDistance && result.collider.is_visible() and currentKey == null:
+	if result and result.collider.name == "Safe" and global_transform.origin.distance_to(result.collider.global_transform.origin) < interactionDistance && result.collider.is_visible() and !currentKey:
 		label.show()
 		label.set_text("Press E")
 		safeTarget = result.collider
 	elif isOnDoorRange():
 		label.show()
-		if currentKey == null:
+		if !currentKey:
 			label.set_text("You need to find the key first!")
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
