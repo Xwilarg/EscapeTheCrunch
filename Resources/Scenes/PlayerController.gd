@@ -11,7 +11,7 @@ var door: Object
 var label: Object
 var safeTarget: Object
 var id = 1
-var currentKey: Object = null
+var currentKey: bool = false;
 
 var bgmCalm: Object
 var bgmChase: Object
@@ -43,11 +43,16 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(deg2rad(event.relative.x * xSens))
 		$Camera.rotate_x(deg2rad(event.relative.y * xSens))
-	if Input.is_action_pressed("action") and safeTarget != null and currentKey == null:
-		currentKey = safeTarget
-		safeTarget.hide()
+	if Input.is_action_pressed("action") and safeTarget != null and currentKey == false:
+		currentKey = true;
+		Network.take_badge(Network.playerID);
 		label.hide()
 		safeTarget = null
+
+func lose_badge():
+	if currentKey:
+		currentKey = false;
+		Network.drop_badge(Network.playerID);
 
 func _physics_process(delta):
 	label.hide()

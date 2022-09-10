@@ -62,6 +62,7 @@ func check_chase():
 		target = result.collider.translation;
 		if global_transform.origin.distance_to(result.collider.global_transform.origin) < 1.1:
 			Network.move_entity(result.collider.name, jail.translation);
+			result.collider.lose_badge();
 
 func set_target():
 	patrol();

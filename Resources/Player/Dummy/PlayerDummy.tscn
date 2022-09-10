@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Resources/Player/main_character_rigged_1.glb" type="PackedScene" id=1]
 [ext_resource path="res://Resources/Player/Dummy/PlayerDummy.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Assets/Props/SM_Badge.glb" type="PackedScene" id=3]
 
 [sub_resource type="CylinderShape" id=6]
 
@@ -31,5 +32,8 @@ anim_player = NodePath("../main_character_rigged_1/AnimationPlayer")
 [node name="NavigationAgent" type="NavigationAgent" parent="."]
 
 [node name="RayCast" type="RayCast" parent="."]
+
+[node name="badge" parent="." instance=ExtResource( 3 )]
+transform = Transform( 0.972873, 0.0155816, 0.230815, 0.23134, -0.0655265, -0.970664, 0, 0.997729, -0.0673536, 0, 1.93234, 0 )
 
 [editable path="main_character_rigged_1"]

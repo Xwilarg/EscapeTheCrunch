@@ -12,6 +12,7 @@ func _on_Port_text_changed(new_text):
 
 func _on_Host_pressed():
 	Network.create_server();
+	print(Network.server);
 	hide();
 
 

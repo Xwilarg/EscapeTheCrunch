@@ -64,6 +64,34 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2 )
 [node name="Spawn 4" type="Spatial" parent="Navigation/Spawns"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3 )
 
+[node name="Spawns_boss" type="Spatial" parent="Navigation"]
+
+[node name="Spawn 1" type="Spatial" parent="Navigation/Spawns_boss"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.651202, 0, -25.352 )
+
+[node name="Spawn 2" type="Spatial" parent="Navigation/Spawns_boss"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.3605, 0, -20.4449 )
+
+[node name="Spawn 3" type="Spatial" parent="Navigation/Spawns_boss"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4292, 0, -1.80443 )
+
+[node name="Spawn 4" type="Spatial" parent="Navigation/Spawns_boss"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.5627, 0, -29.1991 )
+
+[node name="Spawns_badge" type="Spatial" parent="Navigation"]
+
+[node name="Spawn 1" type="Spatial" parent="Navigation/Spawns_badge"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.72089, 1.65432, -28.9214 )
+
+[node name="Spawn 2" type="Spatial" parent="Navigation/Spawns_badge"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.0587, 1.65432, -23.1499 )
+
+[node name="Spawn 3" type="Spatial" parent="Navigation/Spawns_badge"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39.7273, 1.65432, -31.7051 )
+
+[node name="Spawn 4" type="Spatial" parent="Navigation/Spawns_badge"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.7955, 1.65432, -31.5597 )
+
 [node name="NetworkSetup" parent="." instance=ExtResource( 1 )]
 
 [node name="Timer" type="Timer" parent="."]

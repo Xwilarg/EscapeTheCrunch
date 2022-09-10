@@ -36,7 +36,7 @@ func spawn_player(nom) -> void:
 func spawn_boss(nom) -> void:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	var spawns = get_node("/root/FPSController/Navigation/Spawns").get_children()
+	var spawns = get_node("/root/FPSController/Navigation/Spawns_boss").get_children()
 	var pl = load("res://Resources/Scenes/Boss.tscn")
 	var nb = rng.randi_range(0, spawns.size() - 1)
 	var instance = pl.instance()
@@ -44,16 +44,61 @@ func spawn_boss(nom) -> void:
 	instance.translation = spawns[nb].translation;
 	get_node("/root/FPSController/Navigation/").add_child(instance);
 
+remote func show_badge(nom) -> void:
+	var tmp = get_node_or_null("/root/FPSController/Navigation/" + nom);
+	if tmp && tmp != playerID:
+		tmp.badge.show();
+	pass
+
+remote func hide_badge(nom) -> void:
+	var tmp = get_node_or_null("/root/FPSController/Navigation/" + nom);
+	if tmp && tmp != playerID:
+		tmp.badge.hide();
+	pass
+
+remote func take_badge(nom) -> void:
+	if server == null:
+		rpc_id(1, "take_badge", playerID);
+	else:
+		var tmp = get_node_or_null("/root/FPSController/Navigation/Safe");
+		if tmp:
+			tmp.free();
+		rpc("show_badge", nom);
+	pass
+
+func drop_badge(nom) -> void:
+	if server == null:
+		rpc_id(1, "drop_badge", playerID);
+	else:
+		rpc("hide_badge", nom);
+		spawn_badge("Safe");
+	pass
+
+func spawn_badge(nom) -> void:
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var spawns = get_node("/root/FPSController/Navigation/Spawns_badge").get_children()
+	var pl = load("res://Resources/Scenes/Safe.tscn")
+	var nb = rng.randi_range(0, spawns.size() - 1)
+	var instance = pl.instance()
+	instance.name = nom;
+	instance.translation = spawns[nb].translation;
+	get_node("/root/FPSController/Navigation/").add_child(instance);
+
+func who_is_this(nom):
+	var id = -1;
+	for _x in peers:
+			if str(_x) in nom:
+				id = _x;
+	return id;
+
 func move_entity(nom, pos) -> void:
 	if "Server" in nom || "Boss" in nom:
 		var tmp = get_node_or_null("/root/FPSController/Navigation/" + nom);
 		if tmp:
 			tmp.translation = pos;
 	else:
-		var id = -1;
-		for _x in peers:
-			if str(_x) in nom:
-				id = _x;
+		var id = who_is_this(nom);
 		if id != -1:
 			rpc_id(id, "p_teleport", pos)
 
@@ -70,6 +115,7 @@ func create_server() -> void:
 	playerID = "PlayerServer"
 	spawn_player(playerID);
 	spawn_boss("Boss 1");
+	spawn_badge("Safe");
 	var timer = get_node("/root/FPSController/Timer");
 	timer.set_wait_time(0.05);
 	timer.connect("timeout", get_node("/root/FPSController/Navigation/"), "_refresh_game");

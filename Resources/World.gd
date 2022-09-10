@@ -13,6 +13,7 @@ func _ready():
 
 var PlayD = preload("res://Resources/Player/Dummy/PlayerDummy.tscn");
 var BossD = preload("res://Resources/Boss/Dummy/BossDummy.tscn");
+var Badge = preload("res://Resources/Scenes/Safe.tscn");
 
 func create_entity(UInfo):
 	var Instance;
@@ -20,6 +21,8 @@ func create_entity(UInfo):
 		Instance = PlayD.instance();
 	elif UInfo["type"] == "Boss":
 		Instance = BossD.instance();
+	elif UInfo["type"] == "Safe":
+		Instance = Badge.instance();
 	else:
 		pass
 	Instance.name = UInfo["name"];
@@ -36,6 +39,8 @@ func prepare_packet(obj):
 		packet["type"] = "Player";
 	elif "Boss" in obj.get_name():
 		packet["type"] = "Boss";
+	elif "Safe" in obj.get_name():
+		packet["type"] = "Safe";
 	else:
 		packet["type"] = "terrain";
 	packet["pos"] = obj.translation;
