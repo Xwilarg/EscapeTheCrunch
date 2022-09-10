@@ -2,8 +2,8 @@ extends Entity
 
 class_name Boss
 
-export var speedWalk = 5
-export var speedRun = 10
+export var speedWalk = 7
+export var speedRun = 14
 
 var speed: int
 var jail: Object
@@ -47,7 +47,8 @@ func advance():
 		# Calculate the velocity.
 		vel = (target_point - pos).slide(n).normalized() * speed;
 	move_and_slide(vel, Vector3(0, 1, 0));
-	look_at(transform.origin - vel, Vector3.UP)
+	if vel.length() > 0:
+		look_at(transform.origin - vel, Vector3.UP)
 
 func _physics_process(delta):
 	if target.distance_to(self.translation) < 2.5:
