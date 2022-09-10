@@ -2,7 +2,12 @@ extends Entity
 
 class_name Boss
 
-export var speed = 5
+export var speedWalk = 5
+export var speedRun = 10
+
+var speed: int
+
+var targetOverride: Vector3	= Vector3.ZERO
 
 var path = []
 
@@ -22,7 +27,13 @@ func _ready():
 	pass
 
 func advance():
-	var target_point = $NavigationAgent.get_next_location();
+	var target_point: Vector3
+	if targetOverride == Vector3.ZERO:
+		target_point = $NavigationAgent.get_next_location()
+		speed = speedWalk
+	else:
+		target_point = targetOverride;
+		speed = speedRun
 	var pos = get_global_transform().origin;
 	var vel = Vector3(0, 0, 0);
 	# Floor normal.
@@ -34,10 +45,11 @@ func advance():
 		# Calculate the velocity.
 		vel = (target_point - pos).slide(n).normalized() * speed;
 	move_and_slide(vel, Vector3(0, 1, 0));
-	look_at(transform.origin + vel, Vector3.UP)
+	look_at(transform.origin - vel, Vector3.UP)
 
 func _physics_process(delta):
 	if target.distance_to(self.translation) < 2.5:
+		targetOverride = Vector3.ZERO
 		var spawns = get_node("/root/FPSController/Navigation/Waypoints").get_children()
 		if spawns.size() > 0:
 			var nb = rng.randi_range(0, spawns.size() - 1)
@@ -49,7 +61,7 @@ func _physics_process(delta):
 		advance();
 	
 	var from = self.translation + Vector3(0, 1, 0)
-	var to = from + global_transform.basis.y * 100
+	var to = from + global_transform.basis.z * 100
 	var result = get_world().direct_space_state.intersect_ray(from, to)
-	if result:
-		print(result.collider.name)
+	if result and "Player" in result.collider.name:
+		targetOverride = result.collider.translation
