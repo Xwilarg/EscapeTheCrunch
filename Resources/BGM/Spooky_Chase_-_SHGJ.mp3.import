@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Spooky_Chase_-_SHGJ.mp3-52ea791e37e3cdda4348d0a99b7d5013.mp3str"
+
+[deps]
+
+source_file="res://Resources/BGM/Spooky_Chase_-_SHGJ.mp3"
+dest_files=[ "res://.import/Spooky_Chase_-_SHGJ.mp3-52ea791e37e3cdda4348d0a99b7d5013.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
