@@ -85,10 +85,10 @@ remote func r_refresh_game(s_NewGameWorld):
 		GameWorld.erase(_x);
 	if GameWorld.size() > 0:
 		for _x in GameWorld:
-			tmp = get_node_or_null("/root/FPSController/Navigation/" + _x["name"]);
+			tmp = get_node_or_null("/root/FPSController/Navigation/" + _x);
 			if tmp:
 				tmp.free();
-	
+
 remote func r_update_player(toUpdate):
 	var currentData = get_node_or_null("/root/FPSController/Navigation/" + toUpdate["name"]);
 	if currentData:

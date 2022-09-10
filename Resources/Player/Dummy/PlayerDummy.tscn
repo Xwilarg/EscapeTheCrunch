@@ -35,5 +35,6 @@ anim_player = NodePath("../main_character_rigged_1/AnimationPlayer")
 
 [node name="badge" parent="." instance=ExtResource( 3 )]
 transform = Transform( 0.972873, 0.0155816, 0.230815, 0.23134, -0.0655265, -0.970664, 0, 0.997729, -0.0673536, 0, 1.93234, 0 )
+visible = false
 
 [editable path="main_character_rigged_1"]
