@@ -66,10 +66,9 @@ func _physics_process(delta):
 	elif isOnDoorRange():
 		label.show()
 		if currentKey == null:
-			label.set_text("You need to find your key first!")
-		elif door.areAllPlayersReady():
-			label.hide() # End of the game!
+			label.set_text("You need to find the key first!")
 		else:
-			label.set_text("Help the others players to find their key and come back with everyone")
+			pass 
+			# End of the game!
 	else:
 		safeTarget = null
