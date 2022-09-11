@@ -3,7 +3,7 @@ extends ABoss
 class_name Boss
 
 export var speedWalk = 7
-export var speedRun = 10
+export var speedRun = 12
 
 var speed: int
 var jail: Object

@@ -126,7 +126,7 @@ remote func boss_target(pos: Vector3) -> void:
 	else:
 		var tmp = get_node_or_null("/root/FPSController/Navigation/Boss 1");
 		if tmp:
-			tmp.speed = tmp.speed + 1;
+			tmp.speed = tmp.speedRun;
 			tmp.target = pos;
 
 func who_is_this(nom) -> int:
