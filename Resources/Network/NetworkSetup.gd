@@ -19,3 +19,8 @@ func _on_Host_pressed():
 func _on_Join_pressed():
 	Network.join_server();
 	hide();
+
+
+func _on_JoinMain_pressed():
+	Network.join_main_server()
+	hide()
