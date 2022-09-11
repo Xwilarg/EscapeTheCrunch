@@ -20,6 +20,9 @@ var timerJail = 0.0
 var jailNextState = false
 var isHeadless: bool
 
+var infoLabel: Label
+var labelTimer = 0.0
+
 func _ready() -> void:
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
@@ -29,6 +32,7 @@ func _ready() -> void:
 	get_tree().connect("network_peer_connected", self, "_peer_connected");
 	get_tree().connect("network_peer_disconnected", self, "_peer_disconnected");
 	isHeadless = "--server" in OS.get_cmdline_args()
+	infoLabel = get_node("/root/FPSController/GlobalInfo")
 	if isHeadless:
 		create_server()
 
@@ -69,12 +73,16 @@ remote func show_badge(nom) -> void:
 	if tmp && tmp.name != playerID:
 		tmp.badge_show();
 	pass
+	infoLabel.set_text("A player got the badge!")
+	labelTimer = 5.0
 
 remote func hide_badge(nom) -> void:
 	var tmp = get_node_or_null("/root/FPSController/Navigation/" + nom);
 	if tmp && tmp.name != playerID:
 		tmp.badge_hide();
 	pass
+	infoLabel.set_text("The badge was dropped!")
+	labelTimer = 5.0
 
 remote func take_badge(nom) -> void:
 	if server == null:
@@ -86,6 +94,8 @@ remote func take_badge(nom) -> void:
 		delete_jd();
 		timerJail = 10.0
 		rpc("show_badge", nom);
+	infoLabel.set_text("A player got the badge!")
+	labelTimer = 5.0
 	pass
 
 remote func drop_badge(nom) -> void:
@@ -95,6 +105,8 @@ remote func drop_badge(nom) -> void:
 		rpc("hide_badge", nom);
 		spawn_badge("Safe");
 		spawn_jd();
+	infoLabel.set_text("The badge was dropped!")
+	labelTimer = 5.0
 	pass
 
 func spawn_badge(nom) -> void:
@@ -111,7 +123,6 @@ remote func end_single_game():
 	if tmp:
 		tmp.end_game();
 	pass
-
 
 remote func end_mult_game():
 	if server == null:
@@ -184,6 +195,10 @@ func timer_jail_off():
 	timerJail = 30.0
 
 func _physics_process(delta):
+	if labelTimer > 0.0:
+		labelTimer -= delta
+		if labelTimer <= delta:
+			infoLabel.set_text("")
 	if timerJail > 0.0:
 		timerJail -= delta
 		if timerJail <= 0.0:

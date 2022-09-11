@@ -184,3 +184,12 @@ script = ExtResource( 3 )
 voices = [ ExtResource( 9 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 7 ), ExtResource( 8 ) ]
 
 [node name="Player" type="AudioStreamPlayer" parent="VoiceManager"]
+
+[node name="GlobalInfo" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -308.0
+margin_right = -154.0
+margin_bottom = 14.0
+rect_scale = Vector2( 4, 4 )
+align = 1
