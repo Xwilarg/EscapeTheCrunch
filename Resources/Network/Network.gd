@@ -122,7 +122,7 @@ remote func end_mult_game():
 
 remote func boss_target(pos: Vector3) -> void:
 	if server == null:
-		rpc_id(1, "boss_target", playerID);
+		rpc_id(1, "boss_target", pos);
 	else:
 		var tmp = get_node_or_null("/root/FPSController/Navigation/Boss 1");
 		if tmp:
