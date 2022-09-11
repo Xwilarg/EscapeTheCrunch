@@ -82,11 +82,16 @@ remote func r_refresh_game(s_NewGameWorld):
 			tmp = get_node_or_null("/root/FPSController/Navigation/" + _x["name"]);
 			if tmp:
 				update_unit(_x, tmp);
-		GameWorld.erase(_x);
+		GameWorld.erase(_x["name"]);
 	if GameWorld.size() > 0:
 		for _x in GameWorld:
+			if not "Player" in _x :
+				if not "Safe" in _x :
+					if not "Boss" in _x :
+						GameWorld.erase(_x);
+		for _x in GameWorld:
 			tmp = get_node_or_null("/root/FPSController/Navigation/" + _x);
-			if tmp:
+			if tmp && _x != Network.playerID:
 				tmp.free();
 
 remote func r_update_player(toUpdate):
