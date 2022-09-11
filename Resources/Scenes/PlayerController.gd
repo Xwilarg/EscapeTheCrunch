@@ -75,6 +75,10 @@ func lose_badge():
 			sprintUI.show()
 		Network.drop_badge(Network.playerID);
 
+func end_game():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_tree().reload_current_scene()
+
 func _physics_process(delta):
 	if sprintDurationTimer > 0.0:
 		sprintDurationTimer -= delta
@@ -117,7 +121,6 @@ func _physics_process(delta):
 		if !currentKey:
 			label.set_text("You need to find the key first!")
 		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			get_tree().reload_current_scene()
+			Network.end_mult_game();
 	else:
 		safeTarget = null
