@@ -3,7 +3,7 @@ extends ABoss
 class_name Boss
 
 export var speedWalk = 7
-export var speedRun = 7
+export var speedRun = 10
 
 var speed: int
 var jail: Object
@@ -61,6 +61,7 @@ func check_chase():
 		target = result.collider.translation;
 		if global_transform.origin.distance_to(result.collider.global_transform.origin) < 1.1:
 			Network.move_entity(result.collider.name, jail.translation);
+			speed = speedWalk;
 			if result.collider.name == Network.playerID:
 				result.collider.lose_badge();
 
