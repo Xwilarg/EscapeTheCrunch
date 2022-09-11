@@ -99,6 +99,20 @@ func spawn_badge(nom) -> void:
 	instance.translation = spawns[nb].translation;
 	get_node("/root/FPSController/Navigation/").add_child(instance);
 
+remote func end_single_game():
+	var tmp = get_node_or_null("/root/FPSController/Navigation/" + playerID);
+	if tmp:
+		tmp.end_game();
+	pass
+
+
+remote func end_mult_game():
+	if server == null:
+		rpc_id(1, "end_mult_game");
+	else:
+		rpc("end_single_game");
+	pass
+
 remote func boss_target(pos: Vector3) -> void:
 	if server == null:
 		rpc_id(1, "boss_target", playerID);
