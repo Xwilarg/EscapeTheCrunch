@@ -202,12 +202,12 @@ func _peer_connected(id):
 	print(teams);
 
 func _peer_disconnected(id):
-	var i = -1;
+	var i = 0;
 	while i < peers.size():
-		i += 1;
 		if peers[i] == id:
 			peers.pop_at(i);
 			teams.pop_at(i);
+		i += 1;
 	
 	var tmp = get_node_or_null("/root/FPSController/Navigation/Player" + str(id));
 	if tmp:
