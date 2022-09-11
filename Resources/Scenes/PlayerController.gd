@@ -16,6 +16,8 @@ var currentKey: bool = false;
 var bgmCalm: Object
 var bgmChase: Object
 
+var verRot: float
+
 func isReadyToExit() -> bool:
 	return currentKey and isOnDoorRange()
 
@@ -42,7 +44,10 @@ func setBGMChase():
 func _input(event):         
 	if event is InputEventMouseMotion:
 		rotate_y(deg2rad(event.relative.x * xSens))
-		$Camera.rotate_x(deg2rad(event.relative.y * xSens))
+		var value = event.relative.y * xSens
+		if value + verRot > -50 and value + verRot < 50:
+			verRot += value
+			$Camera.rotate_x(deg2rad(value))
 	if Input.is_action_pressed("action") and safeTarget != null and !currentKey:
 		currentKey = true;
 		Network.take_badge(Network.playerID);
