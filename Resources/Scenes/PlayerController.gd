@@ -95,7 +95,9 @@ func lose_badge():
 
 func end_game():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	get_tree().reload_current_scene()
+	var tmp = get_node("/root/FPSController/gameover");
+	if tmp:
+		tmp.end_show();
 
 func _physics_process(delta):
 	if sprintDurationTimer > 0.0:

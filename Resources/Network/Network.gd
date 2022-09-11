@@ -114,7 +114,10 @@ remote func end_mult_game():
 		rpc_id(1, "end_mult_game");
 	else:
 		rpc("end_single_game");
-		end_single_game()
+		if !isHeadless:
+			end_single_game()
+		else:
+			get_tree().quit()
 	pass
 
 remote func boss_target(pos: Vector3) -> void:
