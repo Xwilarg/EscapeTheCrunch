@@ -125,6 +125,8 @@ func _physics_process(delta):
 		y = -1
 
 	var currSpeed = speed
+	if currentKey:
+		currSpeed *= 0.8
 	if sprintDurationTimer > 0.0:
 		currSpeed *= 2
 	var velocity = (global_transform.basis.y * y + global_transform.basis.x * x).normalized() * currSpeed
