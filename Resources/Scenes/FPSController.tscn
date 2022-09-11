@@ -170,7 +170,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.4844, 1.13059, -28.2676 )
 
 [node name="ceiling" type="MeshInstance" parent="."]
 transform = Transform( 0.812882, 0, 0, 0, 1, 0, 0, 0, 0.676745, 9.17343, 2.70439, -19.3853 )
-visible = false
 mesh = SubResource( 30 )
 
 [node name="NetworkSetup" parent="." instance=ExtResource( 1 )]
