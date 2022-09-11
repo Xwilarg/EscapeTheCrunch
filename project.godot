@@ -44,13 +44,17 @@ _global_script_class_icons={
 
 [application]
 
-config/name="ShittyHorrorGameJam"
+config/name="Escape the Crunch"
 run/main_scene="res://Resources/Scenes/FPSController.tscn"
 config/icon="res://Resources/icon.png"
 
 [autoload]
 
 Network="*res://Resources/Network/Network.gd"
+
+[display]
+
+window/size/fullscreen=true
 
 [global]
 
