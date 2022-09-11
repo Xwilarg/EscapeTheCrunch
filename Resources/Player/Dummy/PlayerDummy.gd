@@ -31,4 +31,6 @@ func advance():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	#if $main_character_rigged_1/AnimationPlayer.animation_finished("Run"):
+	#	$main_character_rigged_1/AnimationPlayer.play("Run");
 	pass
