@@ -16,7 +16,8 @@ var peers = [];
 var teams = [];
 
 var rng;
-
+var timerJail = 0.0
+var jailNextState = false
 var isHeadless: bool
 
 func _ready() -> void:
@@ -37,11 +38,13 @@ func delete_jd() -> void:
 		tmp.free();
 
 func spawn_jd() -> void:
-	var pl = load("res://Resources/Scenes/JailDoor.tscn")
-	var instance = pl.instance()
-	instance.name = "JailD";
-	instance.translation = Vector3(25, 0, -20);
-	get_node("/root/FPSController/Navigation/").add_child(instance);
+	var tmp = get_node_or_null("/root/FPSController/Navigation/JailD");
+	if tmp == null:
+		var pl = load("res://Resources/Scenes/JailDoor.tscn")
+		var instance = pl.instance()
+		instance.name = "JailD";
+		instance.translation = Vector3(25, 0, -20);
+		get_node("/root/FPSController/Navigation/").add_child(instance);
 
 func spawn_player(nom) -> void:
 	var spawns = get_node("/root/FPSController/Navigation/Spawns").get_children()
@@ -81,6 +84,7 @@ remote func take_badge(nom) -> void:
 		if tmp:
 			tmp.free();
 		delete_jd();
+		timerJail = 10.0
 		rpc("show_badge", nom);
 	pass
 
@@ -167,6 +171,27 @@ func create_server() -> void:
 	timer.set_wait_time(0.05);
 	timer.connect("timeout", get_node("/root/FPSController/Navigation/"), "_refresh_game");
 	timer.start();
+	timer_jail_off();
+
+func timer_jail_on():
+	delete_jd();
+	jailNextState = true
+	timerJail = 10.0
+
+func timer_jail_off():
+	spawn_jd();
+	jailNextState = false
+	timerJail = 30.0
+
+func _physics_process(delta):
+	if timerJail > 0.0:
+		timerJail -= delta
+		if timerJail <= 0.0:
+			jailNextState = !jailNextState
+			if jailNextState:
+				timer_jail_on()
+			else:
+				timer_jail_off()
 
 func join_server() -> void:
 	client = NetworkedMultiplayerENet.new()
