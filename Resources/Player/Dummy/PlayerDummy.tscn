@@ -39,3 +39,4 @@ transform = Transform( 0.972873, 0.0155816, 0.230815, 0.23134, -0.0655265, -0.97
 visible = false
 
 [editable path="main_character_rigged_1"]
+[editable path="badge"]

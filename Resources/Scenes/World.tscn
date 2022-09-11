@@ -18,7 +18,7 @@
 [ext_resource path="res://Resources/Assets/light.tscn" type="PackedScene" id=17]
 
 [sub_resource type="BoxShape" id=4]
-extents = Vector3( 1, 1, 0.3 )
+extents = Vector3( 1, 1, 1.59841 )
 
 [sub_resource type="BoxShape" id=6]
 extents = Vector3( 1, 1, 3 )
@@ -735,7 +735,7 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 20.9219
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0941, 2.86102e-06, -28.775 )
 
 [node name="Cubicle35" parent="." instance=ExtResource( 10 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -17.2035, 2.86102e-06, -28.8104 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -17.2035, 2.86102e-06, -28.7285 )
 
 [node name="Cubicle36" parent="." instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0972, 2.86102e-06, -26.5939 )

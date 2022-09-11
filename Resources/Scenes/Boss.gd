@@ -3,7 +3,7 @@ extends ABoss
 class_name Boss
 
 export var speedWalk = 7
-export var speedRun = 12
+export var speedRun = 9
 
 var speed: int
 var jail: Object
@@ -18,13 +18,7 @@ func _ready():
 	speed = speedWalk
 	jail = get_node("/root/FPSController/Navigation/NavigationMeshInstance/World/Map/Jail")
 	rng.randomize()
-	var spawns = get_node("/root/FPSController/Navigation/Waypoints").get_children()
-	if spawns.size() > 0:
-		var nb = rng.randi_range(0, spawns.size() - 1)
-		target = spawns[nb].translation;
-		$NavigationAgent.set_target_location(target);
-	else:
-		target = self.translation
+	target = self.translation
 	pass
 
 func advance():
@@ -50,8 +44,6 @@ func patrol():
 		if spawns.size() > 0:
 			var nb = rng.randi_range(0, spawns.size() - 1)
 			target = spawns[nb].translation;
-		else:
-			target = self.translation
 
 func check_chase():
 	var from = self.translation + Vector3(0, 1, 0)
