@@ -11,6 +11,12 @@ var speed = 15;
 func _ready():
 	pass
 
+func badge_show():
+	$badge.show();
+
+func badge_hide():
+	$badge.hide();
+
 func move_to(pos):
 	$NavigationAgent.set_target_location(pos);
 
