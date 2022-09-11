@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Branler_les_couilles_voice_-_SHGJ.mp3-322a0f3d9b73271c02276d24d7d3d92b.mp3str"
+
+[deps]
+
+source_file="res://Resources/Assets/Voices/Branler_les_couilles_voice_-_SHGJ.mp3"
+dest_files=[ "res://.import/Branler_les_couilles_voice_-_SHGJ.mp3-322a0f3d9b73271c02276d24d7d3d92b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

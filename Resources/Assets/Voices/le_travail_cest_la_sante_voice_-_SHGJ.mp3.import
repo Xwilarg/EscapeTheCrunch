@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/le_travail_cest_la_sante_voice_-_SHGJ.mp3-0405562c4d5d8720e4ec848de4e2338b.mp3str"
+
+[deps]
+
+source_file="res://Resources/Assets/Voices/le_travail_cest_la_sante_voice_-_SHGJ.mp3"
+dest_files=[ "res://.import/le_travail_cest_la_sante_voice_-_SHGJ.mp3-0405562c4d5d8720e4ec848de4e2338b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

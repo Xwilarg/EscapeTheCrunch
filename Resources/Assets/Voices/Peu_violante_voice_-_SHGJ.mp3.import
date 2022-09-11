@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Peu_violante_voice_-_SHGJ.mp3-cd2ac6cf3da78e4fbcff2b0ef0b515ff.mp3str"
+
+[deps]
+
+source_file="res://Resources/Assets/Voices/Peu_violante_voice_-_SHGJ.mp3"
+dest_files=[ "res://.import/Peu_violante_voice_-_SHGJ.mp3-cd2ac6cf3da78e4fbcff2b0ef0b515ff.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

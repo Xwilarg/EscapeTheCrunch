@@ -2,8 +2,12 @@ extends Node
 
 export var voices: Array
 var rng: RandomNumberGenerator = null
+var player: AudioStreamPlayer
 
-func getVoice() -> Object:
+func playRandomVoice() -> void:
 	if rng == null:
 		rng = RandomNumberGenerator.new()
-	return voices[rng.randi_range(0, voices.size() - 1)]
+		player = get_node("Player")
+	var voice = voices[rng.randi_range(0, voices.size() - 1)]
+	player.stream = voice
+	player.play()

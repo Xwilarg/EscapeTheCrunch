@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/retournez_bosser_voice_-_SHGJ.mp3-f9b6de2046ee65494e87de1013811131.mp3str"
+
+[deps]
+
+source_file="res://Resources/Assets/Voices/retournez_bosser_voice_-_SHGJ.mp3"
+dest_files=[ "res://.import/retournez_bosser_voice_-_SHGJ.mp3-f9b6de2046ee65494e87de1013811131.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

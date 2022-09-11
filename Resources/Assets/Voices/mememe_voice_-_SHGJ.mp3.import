@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/mememe_voice_-_SHGJ.mp3-7ae64171bbd6ec5dd837c66453c1069f.mp3str"
+
+[deps]
+
+source_file="res://Resources/Assets/Voices/mememe_voice_-_SHGJ.mp3"
+dest_files=[ "res://.import/mememe_voice_-_SHGJ.mp3-7ae64171bbd6ec5dd837c66453c1069f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
