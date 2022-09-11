@@ -61,6 +61,7 @@ func check_chase():
 		target = result.collider.translation;
 		if global_transform.origin.distance_to(result.collider.global_transform.origin) < 1.1:
 			Network.move_entity(result.collider.name, jail.translation);
+			Network.go_to_jail(result.collider.name)
 			speed = speedWalk;
 			if result.collider.name == Network.playerID:
 				result.collider.lose_badge();

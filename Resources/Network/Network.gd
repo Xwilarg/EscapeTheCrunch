@@ -20,6 +20,8 @@ var rng;
 var isHeadless: bool
 
 func _ready() -> void:
+	playersInJail = []
+	isJailActive = true
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
 	get_tree().connect("connected_to_server", self, "_connected_to_server");
@@ -35,6 +37,7 @@ func delete_jd() -> void:
 	var tmp = get_node_or_null("/root/FPSController/Navigation/JailD");
 	if tmp:
 		tmp.free();
+	isJailActive = false
 
 func spawn_jd() -> void:
 	var pl = load("res://Resources/Scenes/JailDoor.tscn")
@@ -42,6 +45,8 @@ func spawn_jd() -> void:
 	instance.name = "JailD";
 	instance.translation = Vector3(25, 0, -20);
 	get_node("/root/FPSController/Navigation/").add_child(instance);
+	playersInJail = []
+	isJailActive = true
 
 func spawn_player(nom) -> void:
 	var spawns = get_node("/root/FPSController/Navigation/Spawns").get_children()
@@ -114,7 +119,16 @@ remote func end_mult_game():
 		rpc_id(1, "end_mult_game");
 	else:
 		rpc("end_single_game");
+		end_single_game()
 	pass
+
+remote func go_to_jail(id):
+	if server == null:
+		if !(id in playersInJail) and isJailActive:
+			playersInJail.push_back(id)
+			checkJailEnd()
+	else:
+		rpc("go_to_jail", id);
 
 remote func boss_target(pos: Vector3) -> void:
 	if server == null:
@@ -207,6 +221,8 @@ func _peer_connected(id):
 	print(teams);
 
 func _peer_disconnected(id):
+	if id in playersInJail:
+		playersInJail.erase(id)
 	var i = -1;
 	while i < peers.size():
 		i += 1;
@@ -221,7 +237,17 @@ func _peer_disconnected(id):
 	print("Player id: " + str(id) + " disconnected");
 	print(peers);
 
+func checkJailEnd():
+	var pCount = peers.size()
+	if isHeadless:
+		pCount += 1
+	if playersInJail.size() >= pCount:
+		end_mult_game()
+
 puppet func r_init_player(r_playerID):
 	team = 1;
 	playerID = r_playerID;
 	spawn_player(playerID);
+
+var playersInJail : Array
+var isJailActive : bool
