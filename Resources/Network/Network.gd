@@ -15,16 +15,30 @@ var playerID = -1
 var peers = [];
 var teams = [];
 
+var rng;
+
 func _ready() -> void:
+	rng = RandomNumberGenerator.new()
+	rng.randomize()
 	get_tree().connect("connected_to_server", self, "_connected_to_server");
 	get_tree().connect("server_disconnected", self, "_server_disconnected");
 	get_tree().connect("connection_failed", self, "_connection_failed");
 	get_tree().connect("network_peer_connected", self, "_peer_connected");
 	get_tree().connect("network_peer_disconnected", self, "_peer_disconnected");
 
+func delete_jd() -> void:
+	var tmp = get_node_or_null("/root/FPSController/Navigation/JailD");
+	if tmp:
+		tmp.free();
+
+func spawn_jd() -> void:
+	var pl = load("res://Resources/Scenes/JailDoor.tscn")
+	var instance = pl.instance()
+	instance.name = "JailD";
+	instance.translation = Vector3(25, 0, -20);
+	get_node("/root/FPSController/Navigation/").add_child(instance);
+
 func spawn_player(nom) -> void:
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
 	var spawns = get_node("/root/FPSController/Navigation/Spawns").get_children()
 	var pl = load("res://Resources/Scenes/Player.tscn")
 	var nb = rng.randi_range(0, spawns.size() - 1)
@@ -34,8 +48,6 @@ func spawn_player(nom) -> void:
 	get_node("/root/FPSController/Navigation/").add_child(instance);
 
 func spawn_boss(nom) -> void:
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
 	var spawns = get_node("/root/FPSController/Navigation/Spawns_boss").get_children()
 	var pl = load("res://Resources/Scenes/Boss.tscn")
 	var nb = rng.randi_range(0, spawns.size() - 1)
@@ -63,20 +75,20 @@ remote func take_badge(nom) -> void:
 		var tmp = get_node_or_null("/root/FPSController/Navigation/Safe");
 		if tmp:
 			tmp.free();
+		delete_jd();
 		rpc("show_badge", nom);
 	pass
 
-func drop_badge(nom) -> void:
+remote func drop_badge(nom) -> void:
 	if server == null:
 		rpc_id(1, "drop_badge", playerID);
 	else:
 		rpc("hide_badge", nom);
 		spawn_badge("Safe");
+		spawn_jd();
 	pass
 
 func spawn_badge(nom) -> void:
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
 	var spawns = get_node("/root/FPSController/Navigation/Spawns_badge").get_children()
 	var pl = load("res://Resources/Scenes/Safe.tscn")
 	var nb = rng.randi_range(0, spawns.size() - 1)
@@ -85,7 +97,7 @@ func spawn_badge(nom) -> void:
 	instance.translation = spawns[nb].translation;
 	get_node("/root/FPSController/Navigation/").add_child(instance);
 
-func who_is_this(nom):
+func who_is_this(nom) -> int:
 	var id = -1;
 	for _x in peers:
 			if str(_x) in nom:
@@ -116,6 +128,7 @@ func create_server() -> void:
 	spawn_player(playerID);
 	spawn_boss("Boss 1");
 	spawn_badge("Safe");
+	spawn_jd();
 	var timer = get_node("/root/FPSController/Timer");
 	timer.set_wait_time(0.05);
 	timer.connect("timeout", get_node("/root/FPSController/Navigation/"), "_refresh_game");

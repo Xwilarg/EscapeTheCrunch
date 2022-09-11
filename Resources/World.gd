@@ -14,6 +14,7 @@ func _ready():
 var PlayD = preload("res://Resources/Player/Dummy/PlayerDummy.tscn");
 var BossD = preload("res://Resources/Boss/Dummy/BossDummy.tscn");
 var Badge = preload("res://Resources/Scenes/Safe.tscn");
+var JD = preload("res://Resources/Scenes/JailDoor.tscn");
 
 func create_entity(UInfo):
 	var Instance;
@@ -23,6 +24,8 @@ func create_entity(UInfo):
 		Instance = BossD.instance();
 	elif UInfo["type"] == "Safe":
 		Instance = Badge.instance();
+	elif UInfo["type"] == "JailD":
+		Instance = JD.instance();
 	else:
 		pass
 	Instance.name = UInfo["name"];
@@ -30,10 +33,13 @@ func create_entity(UInfo):
 	self.add_child(Instance);
 
 func update_unit(NewData, currentUnit):
-	if NewData["type"] != "Safe":
-		currentUnit.move_to(NewData["pos"]);
-	else:
-		currentUnit.translation = NewData["pos"];
+	#if NewData["type"] == "Player" || NewData["type"] == "Boss" && currentUnit.distance_to(NewData["pos"]) < 3:
+	#	currentUnit.move_to(NewData["pos"]);
+	#else:
+	#	currentUnit.translation = NewData["pos"];
+	#	if NewData["type"] == "Player" || NewData["type"] == "Boss":
+	#		currentUnit.move_to(NewData["pos"]);
+	currentUnit.translation = NewData["pos"];
 
 func prepare_packet(obj):
 	var packet = {};
@@ -44,6 +50,8 @@ func prepare_packet(obj):
 		packet["type"] = "Boss";
 	elif "Safe" in obj.get_name():
 		packet["type"] = "Safe";
+	elif "JailD" in obj.get_name():
+		packet["type"] = "JailD";
 	else:
 		packet["type"] = "terrain";
 	packet["pos"] = obj.translation;
@@ -88,7 +96,8 @@ remote func r_refresh_game(s_NewGameWorld):
 			if not "Player" in _x :
 				if not "Safe" in _x :
 					if not "Boss" in _x :
-						GameWorld.erase(_x);
+						if not "JailD" in _x :
+							GameWorld.erase(_x);
 		for _x in GameWorld:
 			tmp = get_node_or_null("/root/FPSController/Navigation/" + _x);
 			if tmp && _x != Network.playerID:
