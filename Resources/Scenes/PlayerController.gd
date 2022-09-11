@@ -7,7 +7,7 @@ export var xSens = -1.0
 export var interactionDistance = 3
 export var doorDistance = 5
 
-export var sprintCooldownRef = 3.0
+export var sprintCooldownRef = 6.0
 export var sprintDuration = 2.0
 
 var sprintCooldown = 0
@@ -18,6 +18,8 @@ var label: Object
 var safeTarget: Object
 var id = 1
 var currentKey: bool = false;
+
+var sprintUI: Object
 
 var bgmCalm: Object
 var bgmChase: Object
@@ -32,6 +34,7 @@ func isOnDoorRange() -> bool:
 
 func _ready():
 	door = get_node("../NavigationMeshInstance/World/Map/Door")
+	sprintUI = get_node("Sprint")
 	bgmCalm = get_node("BGMCalm")
 	bgmChase = get_node("BGMChase")
 	bgmCalm.play()
@@ -62,6 +65,7 @@ func _input(event):
 	if Input.is_action_pressed("sprint") and !currentKey and sprintCooldown <= 0.0:
 		sprintDurationTimer = sprintDuration
 		sprintCooldown = sprintCooldownRef + sprintDuration
+		sprintUI.hide()
 
 func lose_badge():
 	if currentKey:
@@ -73,7 +77,8 @@ func _physics_process(delta):
 		sprintDurationTimer -= delta
 	if sprintCooldown > 0.0:
 		sprintCooldown -= delta
-		print(sprintCooldown)
+		if sprintCooldown <= 0.0:
+			sprintUI.show()
 
 	label.hide()
 
