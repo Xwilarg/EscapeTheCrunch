@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Im_in_office_voice_-_SHGJ.mp3-b487364687b05238163db8e3968ad7c7.mp3str"
+
+[deps]
+
+source_file="res://Resources/Assets/Voices/Im_in_office_voice_-_SHGJ.mp3"
+dest_files=[ "res://.import/Im_in_office_voice_-_SHGJ.mp3-b487364687b05238163db8e3968ad7c7.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

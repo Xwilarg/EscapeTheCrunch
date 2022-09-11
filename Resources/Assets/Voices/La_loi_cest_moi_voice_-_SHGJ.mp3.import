@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/La_loi_cest_moi_voice_-_SHGJ.mp3-c283c27fef2ea235ca64997f9e149885.mp3str"
+
+[deps]
+
+source_file="res://Resources/Assets/Voices/La_loi_cest_moi_voice_-_SHGJ.mp3"
+dest_files=[ "res://.import/La_loi_cest_moi_voice_-_SHGJ.mp3-c283c27fef2ea235ca64997f9e149885.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Entity",
+"class": "ABoss",
+"language": "GDScript",
+"path": "res://Resources/Assets/Scripts/ABoss.gd"
+}, {
+"base": "ABoss",
 "class": "Boss",
 "language": "GDScript",
 "path": "res://Resources/Scenes/Boss.gd"
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://Resources/Scenes/PlayerController.gd"
 } ]
 _global_script_class_icons={
+"ABoss": "",
 "Boss": "",
 "Entity": "",
 "Objective": "",

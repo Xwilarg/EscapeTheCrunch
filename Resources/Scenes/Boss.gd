@@ -1,4 +1,4 @@
-extends Entity
+extends ABoss
 
 class_name Boss
 
@@ -16,6 +16,7 @@ var rng = RandomNumberGenerator.new()
 var target = self.translation
 
 func _ready():
+	initInternal()
 	speed = speedWalk
 	jail = get_node("/root/FPSController/Navigation/NavigationMeshInstance/World/Map/Jail")
 	rng.randomize()
@@ -70,6 +71,7 @@ func set_target():
 	check_chase();
 
 func _physics_process(delta):
+	processInternal(delta)
 	set_target();
 	$NavigationAgent.set_target_location(target);
 	advance();
