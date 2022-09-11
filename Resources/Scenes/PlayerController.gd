@@ -68,6 +68,7 @@ func _input(event):
 		safeTarget = null
 		sprintUI.hide()
 		callUI.hide()
+		setBGMChase()
 	if Input.is_action_pressed("sprint") and !currentKey and sprintCooldown <= 0.0:
 		sprintDurationTimer = sprintDuration
 		sprintCooldown = sprintCooldownRef + sprintDuration
@@ -90,6 +91,7 @@ func lose_badge():
 		if callCooldown <= 0.0:
 			callUI.show()
 		Network.drop_badge(Network.playerID);
+		setBGMCalm()
 
 func end_game():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
