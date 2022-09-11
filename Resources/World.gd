@@ -33,12 +33,6 @@ func create_entity(UInfo):
 	self.add_child(Instance);
 
 func update_unit(NewData, currentUnit):
-	#if NewData["type"] == "Player" || NewData["type"] == "Boss" && currentUnit.distance_to(NewData["pos"]) < 3:
-	#	currentUnit.move_to(NewData["pos"]);
-	#else:
-	#	currentUnit.translation = NewData["pos"];
-	#	if NewData["type"] == "Player" || NewData["type"] == "Boss":
-	#		currentUnit.move_to(NewData["pos"]);
 	currentUnit.translation = NewData["pos"];
 
 func prepare_packet(obj):
