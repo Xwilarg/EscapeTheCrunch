@@ -2,10 +2,10 @@ extends Entity
 
 class_name PlayerController
 
-export var speed = 15
+export var speed = 12
 export var xSens = -1.0
 export var interactionDistance = 3
-export var doorDistance = 1
+export var doorDistance = 1.7
 
 export var sprintCooldownRef = 6.0
 export var sprintDuration = 2.0
