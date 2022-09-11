@@ -10,6 +10,8 @@ extents = Vector3( 0.934822, 0.764533, 0.114974 )
 
 [node name="Cubicle" type="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.98535, 2.86102e-06, -3.7207 )
+collision_layer = 4
+collision_mask = 4
 
 [node name="SM_CubicleFull" parent="." instance=ExtResource( 1 )]
 
