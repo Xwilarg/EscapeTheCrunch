@@ -17,6 +17,8 @@ var teams = [];
 
 var rng;
 
+var isHeadless: bool
+
 func _ready() -> void:
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
@@ -25,7 +27,8 @@ func _ready() -> void:
 	get_tree().connect("connection_failed", self, "_connection_failed");
 	get_tree().connect("network_peer_connected", self, "_peer_connected");
 	get_tree().connect("network_peer_disconnected", self, "_peer_disconnected");
-	if "--server" in OS.get_cmdline_args():
+	isHeadless = "--server" in OS.get_cmdline_args()
+	if isHeadless:
 		create_server()
 
 func delete_jd() -> void:
@@ -150,7 +153,8 @@ func create_server() -> void:
 	server.create_server(int(defaultPort), MAX_CLIENTS);
 	get_tree().set_network_peer(server);
 	playerID = "PlayerServer"
-	spawn_player(playerID);
+	if !isHeadless:
+		spawn_player(playerID);
 	spawn_boss("Boss 1");
 	spawn_badge("Safe");
 	spawn_jd();
