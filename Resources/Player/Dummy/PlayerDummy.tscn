@@ -7,12 +7,12 @@
 [sub_resource type="CylinderShape" id=6]
 
 [sub_resource type="AnimationNodeAnimation" id=7]
-animation = "main_characterAction"
+animation = "run"
 
 [sub_resource type="AnimationNodeBlendTree" id=8]
-graph_offset = Vector2( -367, 88 )
+graph_offset = Vector2( -325.221, 95 )
 nodes/Animation/node = SubResource( 7 )
-nodes/Animation/position = Vector2( -40, 120 )
+nodes/Animation/position = Vector2( 40, 120 )
 node_connections = [ "output", 0, "Animation" ]
 
 [node name="PlayerDummy" type="KinematicBody"]
@@ -28,6 +28,7 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 8 )
 anim_player = NodePath("../main_character_rigged_1/AnimationPlayer")
+active = true
 
 [node name="NavigationAgent" type="NavigationAgent" parent="."]
 
