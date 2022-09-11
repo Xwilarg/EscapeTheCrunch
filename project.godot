@@ -52,10 +52,6 @@ config/icon="res://Resources/icon.png"
 
 Network="*res://Resources/Network/Network.gd"
 
-[display]
-
-window/size/fullscreen=true
-
 [global]
 
 collision=false
