@@ -11,8 +11,6 @@ var playerTarget: Object = null
 
 var path = []
 
-var rng = RandomNumberGenerator.new()
-
 var target = self.translation
 
 func _ready():
