@@ -25,6 +25,8 @@ func _ready() -> void:
 	get_tree().connect("connection_failed", self, "_connection_failed");
 	get_tree().connect("network_peer_connected", self, "_peer_connected");
 	get_tree().connect("network_peer_disconnected", self, "_peer_disconnected");
+	if "--server" in OS.get_cmdline_args():
+		create_server()
 
 func delete_jd() -> void:
 	var tmp = get_node_or_null("/root/FPSController/Navigation/JailD");
