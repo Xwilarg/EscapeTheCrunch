@@ -33,6 +33,8 @@ func create_entity(UInfo):
 	self.add_child(Instance);
 
 func update_unit(NewData, currentUnit):
+	if (currentUnit.translation != NewData["pos"]):
+		currentUnit.look_at(NewData["pos"], Vector3.UP)
 	currentUnit.translation = NewData["pos"];
 
 func prepare_packet(obj):

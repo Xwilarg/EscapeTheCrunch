@@ -60,13 +60,13 @@ func spawn_boss(nom) -> void:
 
 remote func show_badge(nom) -> void:
 	var tmp = get_node_or_null("/root/FPSController/Navigation/" + nom);
-	if tmp && tmp != playerID:
+	if tmp && tmp.name != playerID:
 		tmp.badge.show();
 	pass
 
 remote func hide_badge(nom) -> void:
 	var tmp = get_node_or_null("/root/FPSController/Navigation/" + nom);
-	if tmp && tmp != playerID:
+	if tmp && tmp.name != playerID:
 		tmp.badge.hide();
 	pass
 
