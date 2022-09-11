@@ -10,7 +10,6 @@ var speed = 15;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	initInternal()
-	move_to(self.translation);
 
 func move_to(pos):
 	$NavigationAgent.set_target_location(pos);
@@ -33,4 +32,3 @@ func advance():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	processInternal(delta)
-	advance();
