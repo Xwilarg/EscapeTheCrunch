@@ -146,6 +146,7 @@ puppet func p_teleport(pos) -> void:
 	var tmp = get_node_or_null("/root/FPSController/Navigation/" + playerID);
 	if tmp:
 		tmp.translation = pos;
+		tmp.lose_badge();
 
 func create_server() -> void:
 	print("creating server");
