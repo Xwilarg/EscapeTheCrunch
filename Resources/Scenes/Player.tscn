@@ -19,7 +19,7 @@ transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.6, 0, 0, -0.9 )
 shape = SubResource( 3 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, -1.31134e-07, 5.73206e-15, -5.73206e-15, -7.10543e-15, 1, -1.31134e-07, -1, -7.10543e-15, 0, -5.68504e-08, -1.30059 )
+transform = Transform( 1, -1.31134e-07, 5.73206e-15, -5.73206e-15, -7.10543e-15, 1, -1.31134e-07, -1, -7.10543e-15, 0, -7.09921e-08, -1.62411 )
 
 [node name="Label" type="Label" parent="."]
 anchor_left = 0.5
