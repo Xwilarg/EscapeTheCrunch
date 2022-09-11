@@ -97,6 +97,14 @@ func spawn_badge(nom) -> void:
 	instance.translation = spawns[nb].translation;
 	get_node("/root/FPSController/Navigation/").add_child(instance);
 
+remote func boss_target(pos: Vector3) -> void:
+	if server == null:
+		rpc_id(1, "boss_target", playerID);
+	else:
+		var tmp = get_node_or_null("/root/FPSController/Navigation/Boss 1");
+		if tmp:
+			tmp.target = pos;
+
 func who_is_this(nom) -> int:
 	var id = -1;
 	for _x in peers:
