@@ -7,6 +7,12 @@ export var xSens = -1.0
 export var interactionDistance = 3
 export var doorDistance = 5
 
+export var sprintCooldownRef = 3.0
+export var sprintDuration = 2.0
+
+var sprintCooldown = 0
+var sprintDurationTimer = 0
+
 var door: Object
 var label: Object
 var safeTarget: Object
@@ -53,6 +59,9 @@ func _input(event):
 		Network.take_badge(Network.playerID);
 		label.hide()
 		safeTarget = null
+	if Input.is_action_pressed("sprint") and !currentKey and sprintCooldown <= 0.0:
+		sprintDurationTimer = sprintDuration
+		sprintCooldown = sprintCooldownRef + sprintDuration
 
 func lose_badge():
 	if currentKey:
@@ -60,6 +69,12 @@ func lose_badge():
 		Network.drop_badge(Network.playerID);
 
 func _physics_process(delta):
+	if sprintDurationTimer > 0.0:
+		sprintDurationTimer -= delta
+	if sprintCooldown > 0.0:
+		sprintCooldown -= delta
+		print(sprintCooldown)
+
 	label.hide()
 
 	# Controls
@@ -75,7 +90,10 @@ func _physics_process(delta):
 	elif Input.is_action_pressed("move_forward"):
 		y = -1
 
-	var velocity = (global_transform.basis.y * y + global_transform.basis.x * x).normalized() * speed
+	var currSpeed = speed
+	if sprintDurationTimer > 0.0:
+		currSpeed *= 2
+	var velocity = (global_transform.basis.y * y + global_transform.basis.x * x).normalized() * currSpeed
 	move_and_slide(velocity)
 	
 	var center = get_viewport().size/2
