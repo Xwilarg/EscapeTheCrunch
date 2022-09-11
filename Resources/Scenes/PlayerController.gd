@@ -9,8 +9,10 @@ export var doorDistance = 5
 
 export var sprintCooldownRef = 6.0
 export var sprintDuration = 2.0
+export var callCooldownRef = 8.0
 
 var sprintCooldown = 0
+var callCooldown = 0
 var sprintDurationTimer = 0
 
 var door: Object
@@ -20,6 +22,7 @@ var id = 1
 var currentKey: bool = false;
 
 var sprintUI: Object
+var callUI: Object
 
 var bgmCalm: Object
 var bgmChase: Object
@@ -35,6 +38,7 @@ func isOnDoorRange() -> bool:
 func _ready():
 	door = get_node("../NavigationMeshInstance/World/Map/Door")
 	sprintUI = get_node("Sprint")
+	callUI = get_node("Call")
 	bgmCalm = get_node("BGMCalm")
 	bgmChase = get_node("BGMChase")
 	bgmCalm.play()
@@ -63,16 +67,28 @@ func _input(event):
 		label.hide()
 		safeTarget = null
 		sprintUI.hide()
+		callUI.hide()
 	if Input.is_action_pressed("sprint") and !currentKey and sprintCooldown <= 0.0:
 		sprintDurationTimer = sprintDuration
 		sprintCooldown = sprintCooldownRef + sprintDuration
 		sprintUI.hide()
+	if Input.is_action_pressed("call") and !currentKey and callCooldown <= 0.0:
+		var center = get_viewport().size/2
+		var from = $Camera.project_ray_origin(center)
+		var to = from + $Camera.project_ray_normal(center) * 100
+		var result = get_world().direct_space_state.intersect_ray(from, to)
+		if result:
+			Network.boss_target(result.position)
+			callCooldown = callCooldownRef
+			callUI.hide()
 
 func lose_badge():
 	if currentKey:
 		currentKey = false;
 		if sprintCooldown <= 0.0:
 			sprintUI.show()
+		if callCooldown <= 0.0:
+			callUI.show()
 		Network.drop_badge(Network.playerID);
 
 func _physics_process(delta):
@@ -82,6 +98,10 @@ func _physics_process(delta):
 		sprintCooldown -= delta
 		if sprintCooldown <= 0.0 and !currentKey:
 			sprintUI.show()
+	if callCooldown > 0.0:
+		callCooldown -= delta
+		if callCooldown <= 0.0 and !currentKey:
+			callUI.show()
 
 	label.hide()
 
@@ -103,7 +123,7 @@ func _physics_process(delta):
 		currSpeed *= 2
 	var velocity = (global_transform.basis.y * y + global_transform.basis.x * x).normalized() * currSpeed
 	move_and_slide(velocity)
-	
+
 	var center = get_viewport().size/2
 	var from = $Camera.project_ray_origin(center)
 	var to = from + $Camera.project_ray_normal(center) * 100
