@@ -62,6 +62,7 @@ func _input(event):
 		Network.take_badge(Network.playerID);
 		label.hide()
 		safeTarget = null
+		sprintUI.hide()
 	if Input.is_action_pressed("sprint") and !currentKey and sprintCooldown <= 0.0:
 		sprintDurationTimer = sprintDuration
 		sprintCooldown = sprintCooldownRef + sprintDuration
@@ -70,6 +71,8 @@ func _input(event):
 func lose_badge():
 	if currentKey:
 		currentKey = false;
+		if sprintCooldown <= 0.0:
+			sprintUI.show()
 		Network.drop_badge(Network.playerID);
 
 func _physics_process(delta):
@@ -77,7 +80,7 @@ func _physics_process(delta):
 		sprintDurationTimer -= delta
 	if sprintCooldown > 0.0:
 		sprintCooldown -= delta
-		if sprintCooldown <= 0.0:
+		if sprintCooldown <= 0.0 and !currentKey:
 			sprintUI.show()
 
 	label.hide()
